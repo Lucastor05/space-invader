@@ -1,5 +1,30 @@
 const grille = document.querySelector(".grille");
+
+
 const tableauGrille = grille.children;
+
+
+
+for (let pas = 1; pas <241; pas++) {
+
+    let newDiv = document.createElement("div");
+
+    if(pas % 20 === 0){
+        newDiv.setAttribute("class","right_div");
+    }
+
+    if((pas-1) % 20 === 0){
+        newDiv.setAttribute("class","left_div");
+    }
+
+
+
+    grille.appendChild(newDiv);
+}
+
+
+
+
 
 function removeAlien(tableau, grid){
     tableau.forEach(element => {
@@ -53,36 +78,6 @@ function moveAlien(){
 
 
 
-
-for (let pas = 1; pas <241; pas++) {
-
-    let newDiv = document.createElement("div");
-
-    if(pas % 20 === 0){
-        newDiv.setAttribute("class","right_div");
-    }
-
-    if((pas-1) % 20 === 0){
-        newDiv.setAttribute("class","left_div");
-    }
-
-
-
-    grille.appendChild(newDiv);
-}
-
-
-
-
-const tableauGrille = grille.children;
-
-tableauGrille[230].classList.add("tireur");
-
-
-
-
-
-
 tableauGrille[230].classList.add("tireur");
 var alien = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
 var direction = 1;
@@ -99,37 +94,9 @@ var interval = setInterval(moveAlien, 1000);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 var tableauId = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
 
 
-const tableauGrille = grille.children;
 
 tableauGrille[230].classList.add("tireur");
 
