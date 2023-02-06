@@ -3,15 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space-invader</title>
+    <title>Space Invader</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="background-music">
+        <p id="text">Modifié le volume : </p>
+        <audio autoplay id="myAudio">
+            <source src="#" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <input id="musicVolum" type="range" value="0.01" min="0" max="1" step="0.01">
+    </div>
+
+
     <h3>Score :</h3>
 
 <div class="grille"></div>
  
+    
 
+    <script>    
+    const music = document.getElementById("musicVolum");
+    const audio = document.getElementById("myAudio");
+    
+    music.addEventListener("click", function() {
+        audio.volume = music.value;    
+    });
+    </script>
     <script src="app.js"></script>
     <script src="test.js"></script>
 </body>
