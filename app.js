@@ -18,8 +18,6 @@ for (let pas = 1; pas <241; pas++) {
     newDiv.classList.add("tireur");
   }
 
-  newDiv.setAttribute("id", pas);
-
   grille.appendChild(newDiv);
 }
 const tireur = document.querySelector(".tireur");
