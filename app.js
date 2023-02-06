@@ -1,5 +1,6 @@
 const grille = document.querySelector(".grille");
-let positionTireur = 230;
+const tireur = document.querySelector(".tireur");
+
 
 for (let pas = 1; pas <241; pas++) {
 
@@ -13,81 +14,165 @@ for (let pas = 1; pas <241; pas++) {
         newDiv.setAttribute("class","left_div");
     }
 
+
+
     grille.appendChild(newDiv);
-  if (pas === positionTireur) {
-    newDiv.classList.add("tireur");
-  }
-
-  grille.appendChild(newDiv);
 }
-const tireur = document.querySelector(".tireur");
 
-document.addEventListener("keydown", function(event) {
-  if (event.code === "ArrowLeft" && positionTireur > 0) {
-    tireur.classList.remove("tireur");
+
+
+
+
+/*var newArray = tableauId;
+newArray.forEach(element => {
+    if(newArray[element].classList == "right_div"){
+        tableauId.forEach(element => {
+            tableauId[element]+=20;
+        });
+    }else{
+        tableauId.forEach(element => {
+            tableauId[element]+=1;
+        });
+    }
+});*/
+
+
+var tableauId = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
+
+
+const tableauGrille = grille.children;
+
+tableauGrille[230].classList.add("tireur");
+
+
+
+
+tableauId.forEach(element => {
+    tableauGrille[element].classList.add("alien");
+});
+
+tableauId.forEach(element => {
+    tableauGrille[element].classList.add("alien");
+});
+
+
+function whereTireur() {
+    for (let i = 160; i < 240; i++) {
+        if (tableauGrille[i].classList.contains("tireur")) {
+            return i;
+        }
+    }
+}
+var positionTireur = whereTireur();
+
+document.addEventListener("keydown",
+function moov(event) {
+    loose();
+    if (event.code === "ArrowLeft" || event.code === "KeyA") {
+        if (!tableauGrille[positionTireur].classList.contains("left_div")) {
+            moovLeft();
+        }
+    } else if (event.code === "ArrowRight" || event.code === "KeyD") {
+        if (!tableauGrille[positionTireur].classList.contains("right_div")) {
+            moovRight();
+        }
+    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > 180 ) {
+            moovUp();        
+    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < 219 ) {
+            moovDown();
+    }else if ((event.code === "Space")) {
+        shoot();
+    }
+});
+
+function moovLeft() {
+    tableauGrille[positionTireur].classList.remove("tireur");
     positionTireur--;
-    document.getElementById(positionTireur).classList.add("tireur");
-
-  } else if (event.code === "ArrowRight" && positionTireur < 239) {
-    tireur.classList.remove("tireur");
+    tableauGrille[positionTireur].classList.add("tireur");
+}
+function moovRight() {
+    tableauGrille[positionTireur].classList.remove("tireur");
     positionTireur++;
-    document.getElementById(positionTireur).classList.add("tireur");
-  }
-});
+    tableauGrille[positionTireur].classList.add("tireur");
+}
+function moovUp() {
+    tableauGrille[positionTireur].classList.remove("tireur");
+    positionTireur-=20;
+    tableauGrille[positionTireur].classList.add("tireur");
+}
+function moovDown() {
+    tableauGrille[positionTireur].classList.remove("tireur");
+    positionTireur+=20;
+    tableauGrille[positionTireur].classList.add("tireur");
+    
+}
+function shoot() {
+    var positionTireurShoot = positionTireur;
+    var shoot = setInterval(function () {
+        
+        tableauGrille[positionTireurShoot].classList.add("laser");
+        positionTireurShoot-=20;
+        tableauGrille[positionTireurShoot].classList.add("laser");
 
+        tableauGrille[positionTireurShoot+20].classList.remove("laser");
+        
+        if (positionTireurShoot < 20 && positionTireurShoot >= 0) {
+            tableauGrille[positionTireurShoot].classList.remove("laser");
+            clearInterval(shoot);
+        }
+        if (alienHit(positionTireurShoot)) {
+            tableauGrille[positionTireurShoot].classList.remove("laser");
 
-var tableauId = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
+            clearInterval(shoot);
+        }
+    }, 10);
+}
 
-
-const tableauGrille = grille.children;
-
-tableauGrille[230].classList.add("tireur");
-
-
-/*var newArray = tableauId;
-newArray.forEach(element => {
-    if(newArray[element].classList == "right_div"){
-        tableauId.forEach(element => {
-            tableauId[element]+=20;
-        });
-    }else{
-        tableauId.forEach(element => {
-            tableauId[element]+=1;
-        });
+function alienHit(positionTireurShoot) {
+    if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
+        tableauGrille[positionTireurShoot].classList.remove("alien");
+        tableauGrille[positionTireurShoot].classList.remove("laser");
+        boom(positionTireurShoot);
+        winMaybe();
+        return true;
+        
     }
-});*/
+}
 
+function boom(positionTireurShoot) {
+    var i=0;
+    var bimbamboom =setInterval(function () {
 
-var tableauId = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
+        tableauGrille[positionTireurShoot].classList.add("boom");
+        if (i == 2) {
+            tableauGrille[positionTireurShoot].classList.remove("boom");
+            clearInterval(bimbamboom);
 
+        }
+        i+=1;
+    }, 100);
 
-const tableauGrille = grille.children;
+}
 
-tableauGrille[230].classList.add("tireur");
-
-
-/*var newArray = tableauId;
-newArray.forEach(element => {
-    if(newArray[element].classList == "right_div"){
-        tableauId.forEach(element => {
-            tableauId[element]+=20;
-        });
-    }else{
-        tableauId.forEach(element => {
-            tableauId[element]+=1;
-        });
+function loose() {
+    if (tableauGrille[whereTireur()].classList.contains("alien")) {
+        alert("You loose");
+        location.reload();
     }
-});*/
+}
 
-
-tableauId.forEach(element => {
-    tableauGrille[element].classList.add("alien");
-});
-
-tableauId.forEach(element => {
-    tableauGrille[element].classList.add("alien");
-});
-
+function winMaybe() {
+    var win = 0;
+    for (let i = 0; i < 240; i++) {
+        if (tableauGrille[i].classList.contains("alien")) {
+            win+=1;
+        }
+    }
+    if (win == 0) {
+        alert("You win");
+        location.reload();
+    }
+}
 
 /*setInterval(function () {
 const divs = document.querySelectorAll('div');
