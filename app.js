@@ -1,18 +1,20 @@
-const gridContainer = document.querySelector('.grille');
+const grille = document.querySelector(".grille");
 
-for (let i = 0; i < 20; i++) {
-    var rr =0;
-  const gridRow = document.createElement('div');
-  gridRow.innerHTML = rr;
-  rr+=1;
 
-  
-  for (let j = 0; j < 12; j++) {
-    const gridItem = document.createElement('div');
-    gridItem.innerHTML = rr;
-    gridRow.appendChild(gridItem);
-  }
-  
-  gridContainer.appendChild(gridRow);
-  
+for (let pas = 0; pas <240; pas++) {
+
+    let newDiv = document.createElement("div");
+
+    if(pas % 20 === 0){
+        newDiv.setAttribute("id","left_div");
+    }
+
+    if((pas+1) % 20 === 0){
+        newDiv.setAttribute("id","right_div");
+    }
+
+    grille.appendChild(newDiv);
 }
+
+
+
