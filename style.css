@@ -41,10 +41,11 @@ h3 {
     background-size: contain;
 }
 .boom {
-    background-color: red;
+    background: url(ressources/boom.png);
+
 }
 .laser {
-    background: url(https://cdn.pixabay.com/photo/2017/11/27/07/49/putin-2980739_1280.jpg);
+    background: url(ressources/bomba.png);
     
 }
 
