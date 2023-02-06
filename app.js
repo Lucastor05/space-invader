@@ -81,7 +81,7 @@ var wasOnSide = true;
 setAlien(alien, tableauGrille);
 
 
-var interval = setInterval(moveAlien, 100);
+var interval = setInterval(moveAlien, 1000);
 
 
 
