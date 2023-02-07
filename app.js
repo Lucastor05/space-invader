@@ -24,7 +24,14 @@ for (let pas = 1; pas <241; pas++) {
 
 
 
-
+function removeHitAlien(tab, value) {
+    for (var i = 0; i < tab.length; i++) {
+        if (tab[i] === value) {
+          tab.splice(i, 1);
+          break;
+        }
+      }
+}
 
 function removeAlien(tableau, grid){
     tableau.forEach(element => {
@@ -63,7 +70,6 @@ function moveAlien(){
         }else{
             direction = 1;
         }
-        console.log(direction)
         wasOnSide = true;
         
     }else{
@@ -92,25 +98,7 @@ var interval = setInterval(moveAlien, 1000);
 
 
 
-
-
-var tableauId = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
-
-
-
 tableauGrille[230].classList.add("tireur");
-
-
-
-
-tableauId.forEach(element => {
-    tableauGrille[element].classList.add("alien");
-});
-
-tableauId.forEach(element => {
-    tableauGrille[element].classList.add("alien");
-});
-
 
 
 function whereTireur() {
@@ -133,9 +121,9 @@ function moov(event) {
         if (!tableauGrille[positionTireur].classList.contains("right_div")) {
             moovRight();
         }
-    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > 180 ) {
+    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > 179 ) {
             moovUp();        
-    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < 219 ) {
+    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < 220) {
             moovDown();
     }else if ((event.code === "Space")) {
         shoot();
@@ -179,8 +167,9 @@ function shoot() {
         }
         if (alienHit(positionTireurShoot)) {
             tableauGrille[positionTireurShoot].classList.remove("laser");
-
             clearInterval(shoot);
+            removeHitAlien(alien, positionTireurShoot);
+
         }
     }, 10);
 }
