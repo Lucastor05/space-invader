@@ -3,6 +3,17 @@ const tableauGrille = grille.children;
 var proba = 0.01;
 var vitessShootAlien = 700;
 var vitesseCanShoot = 100;
+var min = 179;
+var max = 220;
+var finito = false;
+
+var blaster = [];
+var index = 0;
+
+for (let i = 0; i < 10; i++) {
+    blaster[i] = new Audio("ressources/blaster.mp3");
+    blaster[i].volume = 0.01;
+}
 
 /*FONCTIONS*/
 
@@ -102,9 +113,12 @@ function boom(positionTireurShoot) {
 }
 
 function loose() {
-    if (tableauGrille[whereTireur()].classList.contains("alien")) {
-        alert("You loose");
-        clearInterval(interval1);
+    if(!finito){
+        if (tableauGrille[whereTireur()].classList.contains("alien")) {
+            alert("You loose");
+            finito = true;
+            clearInterval(interval1);
+        }
     }
 }
 
@@ -117,7 +131,9 @@ function winMaybe() {
     }
     if (win == 0) {
         alert("You win");
+        finito = true;
         clearInterval(interval1);
+        min = -1;
     }
 }
 
@@ -144,8 +160,8 @@ function moovDown() {
 }
 function shoot() {
     var positionTireurShoot = positionTireur;
+    
     var shoot = setInterval(function () {
-        
         tableauGrille[positionTireurShoot].classList.add("laser");
         positionTireurShoot-=20;
         tableauGrille[positionTireurShoot].classList.add("laser");
@@ -240,6 +256,10 @@ for (let pas = 1; pas <241; pas++) {
         newDiv.setAttribute("class","left_div");
     }
 
+    if(pas >= 0 && pas <21){
+        newDiv.classList.add("top_div");
+    }
+
 
 
     grille.appendChild(newDiv);
@@ -272,12 +292,19 @@ function moov(event) {
         if (!tableauGrille[positionTireur].classList.contains("right_div")) {
             moovRight();
         }
-    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > 179 ) {
-            moovUp();        
-    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < 220) {
-            moovDown();
+    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > min ) {
+        if (!tableauGrille[positionTireur].classList.contains("top_div")) {
+            moovUp();  
+        }
+        
+    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
+        console.log(max);
+        moovDown();
     }else if ((event.code === "Space")) {
+        blaster[index].currentTime = 0;
+        blaster[index].play();
         shoot();
+        index = (index + 1) % 5;
     }
 });
 
