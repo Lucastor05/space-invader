@@ -31,10 +31,16 @@ function moveAlien(){
     var isLeft = false;
 
     alien.forEach(element => {
+        console.log(element)
         if(tableauGrille[element].classList.contains("right_div") && !wasOnSide){
             isRight = true;
         }else if(tableauGrille[element].classList.contains("left_div") && !wasOnSide){
             isLeft = true;
+        }
+        
+        if(element == 220){
+            alert("You loose :(");
+            location.reload();
         }
     });
 
@@ -59,6 +65,7 @@ function moveAlien(){
     }
 
     setAlien(alien, tableauGrille);
+    loose();
 }
 
 function whereTireur() {
@@ -192,7 +199,7 @@ setAlien(alien, tableauGrille);
 
 
 
-var interval = setInterval(moveAlien, 1000);
+var interval = setInterval(moveAlien, 700);
 
 
 
