@@ -59,6 +59,7 @@ function moveAlien(){
     }
 
     setAlien(alien, tableauGrille);
+    loose();
 }
 
 function whereTireur() {
@@ -145,7 +146,7 @@ function shoot() {
             removeHitAlien(alien, positionTireurShoot);
 
         }
-    }, 10);
+    }, 100);
 }
 
 function alienHit(positionTireurShoot) {
@@ -192,13 +193,12 @@ setAlien(alien, tableauGrille);
 
 
 
-var interval = setInterval(moveAlien, 1000);
+var interval = setInterval(moveAlien, 100);
 
 
 
 document.addEventListener("keydown",
 function moov(event) {
-    loose();
     if (event.code === "ArrowLeft" || event.code === "KeyA") {
         if (!tableauGrille[positionTireur].classList.contains("left_div")) {
             moovLeft();
