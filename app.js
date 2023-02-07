@@ -298,7 +298,6 @@ function moov(event) {
         }
         
     }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
-        console.log(max);
         moovDown();
     }else if ((event.code === "Space")) {
         blaster[index].currentTime = 0;
