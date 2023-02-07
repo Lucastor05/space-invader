@@ -1,28 +1,7 @@
 const grille = document.querySelector(".grille");
-
-
 const tableauGrille = grille.children;
 
-
-
-for (let pas = 1; pas <241; pas++) {
-
-    let newDiv = document.createElement("div");
-
-    if(pas % 20 === 0){
-        newDiv.setAttribute("class","right_div");
-    }
-
-    if((pas-1) % 20 === 0){
-        newDiv.setAttribute("class","left_div");
-    }
-
-
-
-    grille.appendChild(newDiv);
-}
-
-
+/*FONCTIONS*/
 
 function removeHitAlien(tab, value) {
     for (var i = 0; i < tab.length; i++) {
@@ -82,25 +61,6 @@ function moveAlien(){
     setAlien(alien, tableauGrille);
 }
 
-
-
-tableauGrille[230].classList.add("tireur");
-var alien = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
-var direction = 1;
-var wasOnSide = true;
-
-
-setAlien(alien, tableauGrille);
-
-
-var interval = setInterval(moveAlien, 1000);
-
-
-
-
-tableauGrille[230].classList.add("tireur");
-
-
 function whereTireur() {
     for (let i = 160; i < 240; i++) {
         if (tableauGrille[i].classList.contains("tireur")) {
@@ -108,27 +68,41 @@ function whereTireur() {
         }
     }
 }
-var positionTireur = whereTireur();
 
-document.addEventListener("keydown",
-function moov(event) {
-    loose();
-    if (event.code === "ArrowLeft" || event.code === "KeyA") {
-        if (!tableauGrille[positionTireur].classList.contains("left_div")) {
-            moovLeft();
+function boom(positionTireurShoot) {
+    var i=0;
+    var bimbamboom =setInterval(function () {
+
+        tableauGrille[positionTireurShoot].classList.add("boom");
+        if (i == 2) {
+            tableauGrille[positionTireurShoot].classList.remove("boom");
+            clearInterval(bimbamboom);
+
         }
-    } else if (event.code === "ArrowRight" || event.code === "KeyD") {
-        if (!tableauGrille[positionTireur].classList.contains("right_div")) {
-            moovRight();
-        }
-    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > 179 ) {
-            moovUp();        
-    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < 220) {
-            moovDown();
-    }else if ((event.code === "Space")) {
-        shoot();
+        i+=1;
+    }, 100);
+
+}
+
+function loose() {
+    if (tableauGrille[whereTireur()].classList.contains("alien")) {
+        alert("You loose");
+        location.reload();
     }
-});
+}
+
+function winMaybe() {
+    var win = 0;
+    for (let i = 0; i < 240; i++) {
+        if (tableauGrille[i].classList.contains("alien")) {
+            win+=1;
+        }
+    }
+    if (win == 0) {
+        alert("You win");
+        location.reload();
+    }
+}
 
 function moovLeft() {
     tableauGrille[positionTireur].classList.remove("tireur");
@@ -185,40 +159,65 @@ function alienHit(positionTireurShoot) {
     }
 }
 
-function boom(positionTireurShoot) {
-    var i=0;
-    var bimbamboom =setInterval(function () {
 
-        tableauGrille[positionTireurShoot].classList.add("boom");
-        if (i == 2) {
-            tableauGrille[positionTireurShoot].classList.remove("boom");
-            clearInterval(bimbamboom);
+/*DEBUT JEU*/
 
+
+for (let pas = 1; pas <241; pas++) {
+
+    let newDiv = document.createElement("div");
+
+    if(pas % 20 === 0){
+        newDiv.setAttribute("class","right_div");
+    }
+
+    if((pas-1) % 20 === 0){
+        newDiv.setAttribute("class","left_div");
+    }
+
+
+
+    grille.appendChild(newDiv);
+}
+
+tableauGrille[230].classList.add("tireur");
+var alien = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
+var direction = 1;
+var wasOnSide = true;
+var positionTireur = whereTireur();
+
+
+
+setAlien(alien, tableauGrille);
+
+
+
+var interval = setInterval(moveAlien, 1000);
+
+
+
+document.addEventListener("keydown",
+function moov(event) {
+    loose();
+    if (event.code === "ArrowLeft" || event.code === "KeyA") {
+        if (!tableauGrille[positionTireur].classList.contains("left_div")) {
+            moovLeft();
         }
-        i+=1;
-    }, 100);
-
-}
-
-function loose() {
-    if (tableauGrille[whereTireur()].classList.contains("alien")) {
-        alert("You loose");
-        location.reload();
-    }
-}
-
-function winMaybe() {
-    var win = 0;
-    for (let i = 0; i < 240; i++) {
-        if (tableauGrille[i].classList.contains("alien")) {
-            win+=1;
+    } else if (event.code === "ArrowRight" || event.code === "KeyD") {
+        if (!tableauGrille[positionTireur].classList.contains("right_div")) {
+            moovRight();
         }
+    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > 179 ) {
+            moovUp();        
+    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < 220) {
+            moovDown();
+    }else if ((event.code === "Space")) {
+        shoot();
     }
-    if (win == 0) {
-        alert("You win");
-        location.reload();
-    }
-}
+});
+
+
+
 
 /*setInterval(function () {
 const divs = document.querySelectorAll('div');
