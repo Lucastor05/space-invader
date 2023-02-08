@@ -5,6 +5,7 @@ var proba = 0.01;
 var vitessShootAlien = 700;
 var vitesseCanShoot = 100;
 var vitesseAlien = 700;
+var reinforcedProba= 0.1;
 var min = 179;
 var max = 220;
 var finito = false;
@@ -85,6 +86,12 @@ function moveAlien(){
 
     setAlien(alien, tableauGrille);
     loose();
+}
+
+function shouldFireLaser() {
+    
+    let nb = Math.floor(Math.random() * 101);
+    return nb < proba;
 }
 
 function shouldFireLaser() {
@@ -331,16 +338,19 @@ var positionTireur = whereTireur();
 
 if(difficulty == 1){
     proba = 0.5;
-    vitesseAlien = 200;
-    nombreVie = 3;
+    vitesseAlien = 700;
+    nombreVie = 1;
+    reinforcedProba= 0.1;
 }else if(difficulty == 2){
     proba = 2;
     vitesseAlien = 500;
     nombreVie = 2;
+    reinforcedProba= 0.1;
 }else if(difficulty == 3){
     proba = 5;
     vitesseAlien = 300;
-    nombreVie = 1;
+    nombreVie = 3;
+    reinforcedProba= 0.1;
 }else{
     document.location.href="menu.html"; 
 }
@@ -348,6 +358,7 @@ if(difficulty == 1){
 
 
 afficheVie()
+afficheVie();
 setAlien(alien, tableauGrille);
 var interval1 = setInterval(moveAlien, vitesseAlien);
 document.addEventListener("keydown",
