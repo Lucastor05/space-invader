@@ -1,9 +1,23 @@
-document.querySelector("form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    var user = document.getElementById("user").value;
-    sessionStorage.setItem("user", user);
 
+
+document.getElementById("user").placeholder = sessionStorage.getItem("user") || "Entrez votre pseudonyme";
+document.getElementById("user").value = sessionStorage.getItem("user") ;
+const submitBtn = document.querySelector("#jouer");
+const gameModes = document.querySelector(".game-modes");
+
+submitBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  var user = document.getElementById("user").value;
+  if (user == ""){
+    alert("Veuillez entrer un pseudonyme");
+  }else{
+    gameModes.classList.remove("hidden");
+    sessionStorage.setItem("user", user);
+  }
 });
+
+
       
 
 

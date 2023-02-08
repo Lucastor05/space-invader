@@ -1,3 +1,4 @@
+var score=0;
 const grille = document.querySelector(".grille");
 const tableauGrille = grille.children;
 var proba = 0.01;
@@ -7,7 +8,6 @@ var vitesseAlien = 700;
 var min = 179;
 var max = 220;
 var finito = false;
-var score=0;
 var blaster = [];
 var index = 0;
 var nombreVie = 0;
@@ -138,12 +138,14 @@ function winMaybe() {
         }
     }
     if (win == 0) {
-        alert("You win");
+      
         finito = true;
         clearInterval(interval1);
         min = -1;
         localStorage.setItem("score", score);
         bestScores();
+        showModal(score);
+        console.log(score);
     }
 }
 
@@ -188,6 +190,8 @@ function shoot() {
             tableauGrille[positionTireurShoot].classList.remove("laser");
             clearInterval(shoot);
             removeHitAlien(alien, positionTireurShoot);
+            score+=10;
+            console.log(score);
 
         }
 
@@ -340,7 +344,7 @@ function moov(event) {
         blaster[index].play();
         shoot();
         index = (index + 1) % 5;
-        score++;
+        score--;
     }
 });
 
@@ -354,6 +358,38 @@ function bestScores(){
     }
     localStorage.setItem("bestScores", JSON.stringify(bestScores));
 }
+
+
+
+
+
+
+
+
+var modal = document.getElementById("myModal");
+var score = document.getElementById("final-score");
+var replayButton = document.getElementById("replay-button");
+var quitButton = document.getElementById("quit-button");
+
+function showModal(score) {
+  modal.style.display = "block";
+  score.innerHTML =score;
+}
+
+function hideModal() {
+  modal.style.display = "none";
+}
+
+replayButton.onclick = function() {
+  hideModal();
+  // code to restart the game
+};
+
+quitButton.onclick = function() {
+  hideModal();
+  // code to quit the game
+};
+
 
 
 /*setInterval(function () {
