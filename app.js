@@ -1,4 +1,3 @@
-var score=0;
 const grille = document.querySelector(".grille");
 const tableauGrille = grille.children;
 var proba = 0.01;
@@ -8,6 +7,7 @@ var vitesseAlien = 700;
 var min = 179;
 var max = 220;
 var finito = false;
+var score=0;
 var blaster = [];
 var index = 0;
 var nombreVie = 0;
@@ -145,7 +145,6 @@ function winMaybe() {
         localStorage.setItem("score", score);
         bestScores();
         showModal(score);
-        console.log(score);
     }
 }
 
@@ -191,7 +190,6 @@ function shoot() {
             clearInterval(shoot);
             removeHitAlien(alien, positionTireurShoot);
             score+=10;
-            console.log(score);
 
         }
 
@@ -367,13 +365,13 @@ function bestScores(){
 
 
 var modal = document.getElementById("myModal");
-var score = document.getElementById("final-score");
+var scoree = document.getElementById("final-score");
 var replayButton = document.getElementById("replay-button");
 var quitButton = document.getElementById("quit-button");
 
 function showModal(score) {
   modal.style.display = "block";
-  score.innerHTML =score;
+  scoree.innerHTML =score;
 }
 
 function hideModal() {
@@ -382,11 +380,13 @@ function hideModal() {
 
 replayButton.onclick = function() {
   hideModal();
+  window.location.reload()
   // code to restart the game
 };
 
 quitButton.onclick = function() {
   hideModal();
+document.location.href="menu.html";
   // code to quit the game
 };
 
