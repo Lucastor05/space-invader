@@ -120,9 +120,9 @@ function loose() {
     if(!finito){
         if (tableauGrille[whereTireur()].classList.contains("alien")) {
             if(nombreVie == 1){
-                alert("You loose");
                 finito = true;
                 clearInterval(interval1);
+                showModal(score);
             }else{
                 nombreVie--;
                 afficheVie()
@@ -257,7 +257,7 @@ function AlienAreShootingBackWTF(element) {
             
 
             if(nombreVie == 1){
-                alert("You loose :(");
+                showModal(score);
                 clearInterval(interval1);
             }else{
                 nombreVie--;
@@ -347,7 +347,7 @@ if(difficulty == 1){
 
 
 
-
+afficheVie()
 setAlien(alien, tableauGrille);
 var interval1 = setInterval(moveAlien, vitesseAlien);
 document.addEventListener("keydown",
