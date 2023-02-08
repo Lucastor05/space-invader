@@ -1,19 +1,10 @@
-
-
 document.querySelector("form").addEventListener("submit", function(event) {
     event.preventDefault();
     var user = document.getElementById("user").value;
     sessionStorage.setItem("user", user);
-    var username = sessionStorage.getItem("user");
-    var score = parseInt(localStorage.getItem("score"));
-    if (!bestScores[username] || score > bestScores[username]) {
-        bestScores[username] = score;
-      }
     
-      localStorage.setItem("bestScores", JSON.stringify(bestScores));
-    
-      updateScoreList();
 });
+      
 
 
 /*
@@ -35,22 +26,31 @@ userscore.forEach(function(entry) {
 
 
 function updateScoreList() {
-    var best = localStorage.getItem("bestScores");
+    var best = JSON.parse(localStorage.getItem("bestScores")) || {};
+
+    var scores = [];
+    for (username in best) {
+        scores.push({ username: username, score: best[username] });
+    }
+
+    scores.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
     var list = document.querySelector("ul");
     list.innerHTML = "";
-  
-    for (var username in best) {
-      var item = document.createElement("li");
-      item.innerHTML = username + ": " + best[username];
-      list.appendChild(item);
-    }
-  }
-  
-  var storedScores = JSON.parse(localStorage.getItem("bestScores")) || {};
-  bestScores = Object.assign(bestScores, storedScores);
-  
-  updateScoreList();
+
+    scores.forEach(function (entry) {
+        var item = document.createElement("li");
+        item.innerHTML = entry.username + ": " + entry.score;
+        list.appendChild(item);
+    });
+}
+
+updateScoreList();
 
 
-var bestScores = {};
+
+
+
 

@@ -136,6 +136,7 @@ function winMaybe() {
         clearInterval(interval1);
         min = -1;
         localStorage.setItem("score", score);
+        bestScores();
     }
 }
 
@@ -312,7 +313,15 @@ function moov(event) {
 });
 
 
-
+function bestScores(){
+    var username = sessionStorage.getItem("user");
+    var score = parseInt(localStorage.getItem("score"));
+    var bestScores = JSON.parse(localStorage.getItem("bestScores")) || {};
+    if (!bestScores[username] || score > bestScores[username]) {
+    bestScores[username] = score;
+    }
+    localStorage.setItem("bestScores", JSON.stringify(bestScores));
+}
 
 
 /*setInterval(function () {
