@@ -6,7 +6,7 @@ var vitesseCanShoot = 100;
 var min = 179;
 var max = 220;
 var finito = false;
-
+var score=0;
 var blaster = [];
 var index = 0;
 
@@ -183,12 +183,13 @@ function shoot() {
 
         }
 
-        if (tableauGrille[positionTireurShoot].classList.contains("laserAlien")) {
+        /*if (tableauGrille[positionTireurShoot].classList.contains("laserAlien")) {
             tableauGrille[positionTireurShoot].classList.remove("laserAlien");
             tableauGrille[positionTireurShoot].classList.remove("laser");
+            console.log("boom");
             boom(positionTireurShoot);
             clearInterval(shoot);
-        }
+        }*/
 
     }, 300);
 }
