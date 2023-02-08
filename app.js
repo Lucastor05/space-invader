@@ -1,4 +1,5 @@
 const grille = document.querySelector(".grille");
+const difficulty = parseInt(sessionStorage.getItem("difficulty"));
 const tableauGrille = grille.children;
 var proba = 0.01;
 var vitessShootAlien = 700;
@@ -83,7 +84,6 @@ function moveAlien(){
     }
 
     setAlien(alien, tableauGrille);
-    
     loose();
 }
 
@@ -125,6 +125,10 @@ function loose() {
                 clearInterval(interval1);
             }else{
                 nombreVie--;
+                afficheVie()
+                tableauGrille[whereTireur()].classList.remove("tireur");
+                tableauGrille[230].classList.add("tireur");
+                positionTireur = whereTireur();
             }
         }
     }
@@ -187,7 +191,10 @@ function shoot() {
             tableauGrille[positionTireurShoot].classList.remove("laser");
             clearInterval(shoot);
             removeHitAlien(alien, positionTireurShoot);
-
+            if(!finito){
+                score+=10;
+                afficheScore();
+            }
         }
 
         /*if (tableauGrille[positionTireurShoot].classList.contains("laserAlien")) {
@@ -199,6 +206,30 @@ function shoot() {
         }*/
 
     }, 10);
+}
+
+function afficheVie(){
+    var coeur1 = document.getElementById("first_heart");
+    var coeur2 = document.getElementById("second_heart");
+    var coeur3 = document.getElementById("third_heart");
+
+    if(nombreVie == 1){
+        coeur2.style.fill = "#333";
+        coeur3.style.fill = "#333";
+    }else if(nombreVie == 2){
+        coeur3.style.fill = "#333";
+    }else if(nombreVie == 0){
+        coeur1.style.fill = "#333";
+        coeur2.style.fill = "#333";
+        coeur3.style.fill = "#333";
+
+    }
+    
+}
+
+function afficheScore(){
+    var baliseScore = document.getElementById("scoreH3");
+    baliseScore.innerText= "Score :"+score;
 }
 
 function AlienAreShootingBackWTF(element) {
@@ -228,6 +259,7 @@ function AlienAreShootingBackWTF(element) {
                 clearInterval(interval1);
             }else{
                 nombreVie--;
+                afficheVie();
             }
 
         }
@@ -289,17 +321,15 @@ var positionTireur = whereTireur();
 
 
 
-setAlien(alien, tableauGrille);
 
 
 
 
 
-const difficulty = parseInt(sessionStorage.getItem("difficulty"));
 
 if(difficulty == 1){
     proba = 0.5;
-    vitesseAlien = 700;
+    vitesseAlien = 200;
     nombreVie = 3;
 }else if(difficulty == 2){
     proba = 2;
@@ -316,6 +346,7 @@ if(difficulty == 1){
 
 
 
+setAlien(alien, tableauGrille);
 var interval1 = setInterval(moveAlien, vitesseAlien);
 document.addEventListener("keydown",
 function moov(event) {
@@ -339,7 +370,10 @@ function moov(event) {
         blaster[index].play();
         shoot();
         index = (index + 1) % 5;
-        score++;
+        if(!finito){
+            score--;
+            afficheScore();
+        }
     }
 });
 

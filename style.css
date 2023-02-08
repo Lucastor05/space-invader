@@ -95,3 +95,22 @@ body {
     cursor: pointer;
     appearance: none;
 }
+
+.lifeBar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    margin: 0 auto;
+}
+
+svg{
+    height: 30px;
+    width: 30px;
+    fill: #333;
+}
+
+#first_heart, 
+#second_heart,
+#third_heart{
+    fill: red;
+}
