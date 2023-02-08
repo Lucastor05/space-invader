@@ -142,11 +142,13 @@ function winMaybe() {
         }
     }
     if (win == 0) {
-        alert("You win");
+      
         finito = true;
         clearInterval(interval1);
         min = -1;
         localStorage.setItem("score", score);
+        bestScores();
+        showModal(score);
     }
 }
 
@@ -378,6 +380,48 @@ function moov(event) {
 });
 
 
+function bestScores(){
+    var username = sessionStorage.getItem("user");
+    var score = parseInt(localStorage.getItem("score"));
+    var bestScores = JSON.parse(localStorage.getItem("bestScores")) || {};
+    if (!bestScores[username] || score > bestScores[username]) {
+    bestScores[username] = score;
+    }
+    localStorage.setItem("bestScores", JSON.stringify(bestScores));
+}
+
+
+
+
+
+
+
+
+var modal = document.getElementById("myModal");
+var scoree = document.getElementById("final-score");
+var replayButton = document.getElementById("replay-button");
+var quitButton = document.getElementById("quit-button");
+
+function showModal(score) {
+  modal.style.display = "block";
+  scoree.innerHTML =score;
+}
+
+function hideModal() {
+  modal.style.display = "none";
+}
+
+replayButton.onclick = function() {
+  hideModal();
+  window.location.reload()
+  // code to restart the game
+};
+
+quitButton.onclick = function() {
+  hideModal();
+document.location.href="menu.html";
+  // code to quit the game
+};
 
 
 
