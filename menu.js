@@ -4,6 +4,7 @@ document.querySelector("form").addEventListener("submit", function(event) {
     event.preventDefault();
     var user = document.getElementById("user").value;
     sessionStorage.setItem("user", user);
+
     var username = sessionStorage.getItem("user");
     var score = parseInt(localStorage.getItem("score"));
     if (!bestScores[username] || score > bestScores[username]) {
@@ -14,6 +15,25 @@ document.querySelector("form").addEventListener("submit", function(event) {
     
       updateScoreList();
 });
+
+
+const buttonEasy = document.getElementById("easy-mode");
+const buttonMedium = document.getElementById("medium-mode");
+const buttonHard = document.getElementById("hard-mode");
+
+buttonEasy.addEventListener("click", function(){
+  sessionStorage.setItem("difficulty", buttonEasy.value);
+});
+
+buttonMedium.addEventListener("click", function(){
+  sessionStorage.setItem("difficulty", buttonMedium.value);
+});
+
+buttonHard.addEventListener("click", function(){
+  sessionStorage.setItem("difficulty", buttonHard.value);
+});
+
+
 
 
 /*

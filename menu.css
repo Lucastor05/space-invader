@@ -6,7 +6,7 @@
     height: 100vh;
   }
   
-  .game-modes {
+  .game-modes a{
     display: flex;
     flex-direction: row;
     margin-top: 20px;
