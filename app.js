@@ -1,5 +1,6 @@
 const grille = document.querySelector(".grille");
 const tableauGrille = grille.children;
+var score = 0;
 
 /*FONCTIONS*/
 
@@ -26,6 +27,7 @@ function setAlien(tableau, grid){
 
 function moveAlien(){
     removeAlien(alien, tableauGrille);
+    console.log(score);
 
     var isRight = false;
     var isLeft = false;
@@ -102,6 +104,7 @@ function winMaybe() {
     if (win == 0) {
         alert("You win");
         location.reload();
+        localStorage.setItem("score", score);
     }
 }
 
@@ -130,6 +133,7 @@ function shoot() {
     var positionTireurShoot = positionTireur;
     var shoot = setInterval(function () {
         
+        
         tableauGrille[positionTireurShoot].classList.add("laser");
         positionTireurShoot-=20;
         tableauGrille[positionTireurShoot].classList.add("laser");
@@ -146,7 +150,7 @@ function shoot() {
             removeHitAlien(alien, positionTireurShoot);
 
         }
-    }, 100);
+    }, 300);
 }
 
 function alienHit(positionTireurShoot) {
@@ -213,8 +217,10 @@ function moov(event) {
             moovDown();
     }else if ((event.code === "Space")) {
         shoot();
+        score++;
     }
 });
+
 
 
 
