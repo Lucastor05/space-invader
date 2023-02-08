@@ -1,6 +1,19 @@
 const grille = document.querySelector(".grille");
 const tableauGrille = grille.children;
-var score = 0;
+var proba = 0.01;
+var vitessShootAlien = 700;
+var vitesseCanShoot = 100;
+var min = 179;
+var max = 220;
+var finito = false;
+
+var blaster = [];
+var index = 0;
+
+for (let i = 0; i < 10; i++) {
+    blaster[i] = new Audio("ressources/blaster.mp3");
+    blaster[i].volume = 0.01;
+}
 
 /*FONCTIONS*/
 
@@ -38,6 +51,14 @@ function moveAlien(){
         }else if(tableauGrille[element].classList.contains("left_div") && !wasOnSide){
             isLeft = true;
         }
+        
+        if(element == 220){
+            alert("You loose :(");
+            clearInterval(interval1);
+        }
+        if(shouldFireLaser()){
+            AlienAreShootingBackWTF(element);
+        }
     });
 
 
@@ -61,7 +82,12 @@ function moveAlien(){
     }
 
     setAlien(alien, tableauGrille);
+    
     loose();
+}
+
+function shouldFireLaser() {
+    return Math.random() < proba;
 }
 
 function whereTireur() {
@@ -88,9 +114,12 @@ function boom(positionTireurShoot) {
 }
 
 function loose() {
-    if (tableauGrille[whereTireur()].classList.contains("alien")) {
-        alert("You loose");
-        location.reload();
+    if(!finito){
+        if (tableauGrille[whereTireur()].classList.contains("alien")) {
+            alert("You loose");
+            finito = true;
+            clearInterval(interval1);
+        }
     }
 }
 
@@ -103,7 +132,9 @@ function winMaybe() {
     }
     if (win == 0) {
         alert("You win");
-        location.reload();
+        finito = true;
+        clearInterval(interval1);
+        min = -1;
         localStorage.setItem("score", score);
     }
 }
@@ -131,8 +162,8 @@ function moovDown() {
 }
 function shoot() {
     var positionTireurShoot = positionTireur;
+    
     var shoot = setInterval(function () {
-        
         
         tableauGrille[positionTireurShoot].classList.add("laser");
         positionTireurShoot-=20;
@@ -144,13 +175,52 @@ function shoot() {
             tableauGrille[positionTireurShoot].classList.remove("laser");
             clearInterval(shoot);
         }
+
         if (alienHit(positionTireurShoot)) {
             tableauGrille[positionTireurShoot].classList.remove("laser");
             clearInterval(shoot);
             removeHitAlien(alien, positionTireurShoot);
 
         }
+
+        if (tableauGrille[positionTireurShoot].classList.contains("laserAlien")) {
+            tableauGrille[positionTireurShoot].classList.remove("laserAlien");
+            tableauGrille[positionTireurShoot].classList.remove("laser");
+            boom(positionTireurShoot);
+            clearInterval(shoot);
+        }
+
     }, 300);
+}
+
+function AlienAreShootingBackWTF(element) {
+    var positionTireurShoot = element;
+    var positionShip = positionTireur;
+    var shoot = setInterval(function () {
+        
+        tableauGrille[positionTireurShoot].classList.add("laserAlien");
+        positionTireurShoot+=20;
+        tableauGrille[positionTireurShoot].classList.add("laserAlien");
+
+        tableauGrille[positionTireurShoot-20].classList.remove("laserAlien");
+        
+        if (positionTireurShoot > 219 && positionTireurShoot >= 0) {
+            tableauGrille[positionTireurShoot].classList.remove("laserAlien");
+            clearInterval(shoot);
+        }
+        if (ShipnHit(positionTireurShoot)) {
+            tableauGrille[positionTireurShoot].classList.remove("laserAlien");
+            tableauGrille[positionShip].classList.remove("tireur");
+
+            clearInterval(shoot);
+            alert("You loose :(");
+            clearInterval(interval1);
+
+        }
+
+        
+
+    }, vitessShootAlien);
 }
 
 function alienHit(positionTireurShoot) {
@@ -164,6 +234,15 @@ function alienHit(positionTireurShoot) {
     }
 }
 
+function ShipnHit(positionTireurShoot) {
+    if (tableauGrille[positionTireurShoot].classList.contains("tireur")) {
+        tableauGrille[positionTireurShoot].classList.remove("tireur");
+        tableauGrille[positionTireurShoot].classList.remove("laser");
+        boom(positionTireurShoot);
+        return true;
+        
+    }
+}
 
 /*DEBUT JEU*/
 
@@ -178,6 +257,10 @@ for (let pas = 1; pas <241; pas++) {
 
     if((pas-1) % 20 === 0){
         newDiv.setAttribute("class","left_div");
+    }
+
+    if(pas >= 0 && pas <21){
+        newDiv.classList.add("top_div");
     }
 
 
@@ -197,7 +280,7 @@ setAlien(alien, tableauGrille);
 
 
 
-var interval = setInterval(moveAlien, 100);
+var interval1 = setInterval(moveAlien, 700);
 
 
 
@@ -211,12 +294,18 @@ function moov(event) {
         if (!tableauGrille[positionTireur].classList.contains("right_div")) {
             moovRight();
         }
-    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > 179 ) {
-            moovUp();        
-    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < 220) {
-            moovDown();
+    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > min ) {
+        if (!tableauGrille[positionTireur].classList.contains("top_div")) {
+            moovUp();  
+        }
+        
+    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
+        moovDown();
     }else if ((event.code === "Space")) {
+        blaster[index].currentTime = 0;
+        blaster[index].play();
         shoot();
+        index = (index + 1) % 5;
         score++;
     }
 });

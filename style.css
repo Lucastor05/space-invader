@@ -49,7 +49,11 @@ h3 {
     
 }
 
+.laserAlien {
+    background: url(ressources/bombaAlien.png);
 
+    
+}
 
 
 
@@ -60,4 +64,34 @@ body {
     animation: background-defile 10s linear infinite;
 
 
+}
+
+  
+#text {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+  
+#myAudio {
+    width: 10%;
+}
+  
+#musicVolum {
+    width: 10%;
+    height: 25px;
+    background-color: #ddd;
+    appearance: none;
+    outline: none;
+    border-radius: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+  
+#musicVolum::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    appearance: none;
 }
