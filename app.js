@@ -3,12 +3,14 @@ const tableauGrille = grille.children;
 var proba = 0.01;
 var vitessShootAlien = 700;
 var vitesseCanShoot = 100;
+var vitesseAlien = 700;
 var min = 179;
 var max = 220;
 var finito = false;
 var score=0;
 var blaster = [];
 var index = 0;
+var nombreVie = 0;
 
 for (let i = 0; i < 10; i++) {
     blaster[i] = new Audio("ressources/blaster.mp3");
@@ -40,7 +42,6 @@ function setAlien(tableau, grid){
 
 function moveAlien(){
     removeAlien(alien, tableauGrille);
-    console.log(score);
 
     var isRight = false;
     var isLeft = false;
@@ -87,7 +88,9 @@ function moveAlien(){
 }
 
 function shouldFireLaser() {
-    return Math.random() < proba;
+    
+    let nb = Math.floor(Math.random() * 101);
+    return nb < proba;
 }
 
 function whereTireur() {
@@ -116,9 +119,13 @@ function boom(positionTireurShoot) {
 function loose() {
     if(!finito){
         if (tableauGrille[whereTireur()].classList.contains("alien")) {
-            alert("You loose");
-            finito = true;
-            clearInterval(interval1);
+            if(nombreVie == 1){
+                alert("You loose");
+                finito = true;
+                clearInterval(interval1);
+            }else{
+                nombreVie--;
+            }
         }
     }
 }
@@ -192,7 +199,7 @@ function shoot() {
             clearInterval(shoot);
         }*/
 
-    }, 300);
+    }, 10);
 }
 
 function AlienAreShootingBackWTF(element) {
@@ -215,8 +222,14 @@ function AlienAreShootingBackWTF(element) {
             tableauGrille[positionShip].classList.remove("tireur");
 
             clearInterval(shoot);
-            alert("You loose :(");
-            clearInterval(interval1);
+            
+
+            if(nombreVie == 1){
+                alert("You loose :(");
+                clearInterval(interval1);
+            }else{
+                nombreVie--;
+            }
 
         }
 
@@ -242,7 +255,6 @@ function ShipnHit(positionTireurShoot) {
         tableauGrille[positionTireurShoot].classList.remove("laser");
         boom(positionTireurShoot);
         return true;
-        
     }
 }
 
@@ -282,10 +294,30 @@ setAlien(alien, tableauGrille);
 
 
 
-var interval1 = setInterval(moveAlien, 700);
+
+
+const difficulty = parseInt(sessionStorage.getItem("difficulty"));
+
+if(difficulty == 1){
+    proba = 0.5;
+    vitesseAlien = 700;
+    nombreVie = 3;
+}else if(difficulty == 2){
+    proba = 2;
+    vitesseAlien = 500;
+    nombreVie = 2;
+}else if(difficulty == 3){
+    proba = 5;
+    vitesseAlien = 300;
+    nombreVie = 1;
+}else{
+    document.location.href="menu.html"; 
+}
 
 
 
+
+var interval1 = setInterval(moveAlien, vitesseAlien);
 document.addEventListener("keydown",
 function moov(event) {
     if (event.code === "ArrowLeft" || event.code === "KeyA") {
