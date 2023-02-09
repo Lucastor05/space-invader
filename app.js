@@ -110,10 +110,15 @@ function moveAlien(){
             isLeft = true;
         }
         
-        if(element == 220){
-            showModalLoose(score);
-            clearInterval(interval1);
+
+        if(!wasOnSide){
+            if(element == 220 || element == tableauGrille.length - 1){
+                console.log("element : "+element+" |  lenght tab : "+tableauGrille.length)
+                showModalLoose(score);
+                clearInterval(interval1);
+            }
         }
+
         if(shouldFireLaser()){
             AlienAreShootingBackWTF(element);
         }
