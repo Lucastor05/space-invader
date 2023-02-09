@@ -5,36 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="menu.css">
-    <title>Document</title>
+    <title>menu</title>
 </head>
 <body>
 
     <div class="menu-container">
-        <h1>Space Invader</h1>
-        <div class="input-container">
-            <form action="">
-                <label for="username">Pseudo :</label>
-                <input type="text" id="user">
-                <button type="submit" id="jouer">Jouer</button>
+        <h1><img src="ressources/Space_Invaders_logo.GIF.webp"></h1>
+
+        <div class="form-difficulty">
+          <div class="input-container">
+              <form action="" class="input-container">
+                  <label for="username">Votre Pseudo :</label>
+                  <input type="text" id="user">
+                  <button type="submit" id="jouer">Jouer</button>
               </form>
-              
+          </div>
+          <div class="game-modes hidden">
+            <a href="index.html">
+              <button id="easy-mode" value="1">Facile</button>
+              <button id="medium-mode" value="2">Moyen</button>
+              <button id="hard-mode" value="3">Difficile</button>
+            </a>
+          </div>
+          <div class="marketplace-button">
+            <button>Marketplace</button>
+          </div>
         </div>
-        <div class="game-modes hidden">
-          <a href="index.html">
-            <button id="easy-mode" value="1">Facile</button>
-            <button id="medium-mode" value="2">Moyen</button>
-            <button id="hard-mode" value="3">Difficile</button>
-          </a>
-        </div>
-        <div class="marketplace-button">
-          <button>Marketplace</button>
-        </div>
+        
         <div class="scoreboard">
-          <h2>Meilleurs scores</h2>
-          <ul>
+          <h2><strong class="invaderTitleScore">The Space Invader's</strong> high score list</h2>
+          <div class="headerScore">
+            <p class="invaderTitleScore">Pseudo</p>
+            <p class="invaderTitleScore">Score</p>
+          </div>
+          <ol>
   
            
-          </ul>
+          </ol>
         </div>
       </div>
       
