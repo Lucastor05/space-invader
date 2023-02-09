@@ -321,6 +321,112 @@ function shoot() {
 
     }, 10);
 }
+function setCapacite(){
+    var bombabomm = sessionStorage.getItem("3bomba");
+    if(bombabomm == sessionStorage.getItem("user") && use3bomba>0){
+        
+        var positionTireurShoot = whereTireur();
+        if (tableauGrille[positionTireurShoot].classList.contains("right_div")) {
+            
+        }else if (tableauGrille[positionTireurShoot].classList.contains("left_div")) {
+            
+        }else{
+
+        
+        var shoote = setInterval(function () {
+            tableauGrille[positionTireurShoot].classList.add("bomba");
+            tableauGrille[positionTireurShoot-1].classList.add("bomba");
+            tableauGrille[positionTireurShoot+1].classList.add("bomba");
+            positionTireurShoot-=20;
+            tableauGrille[positionTireurShoot].classList.add("bomba");
+            tableauGrille[positionTireurShoot-1].classList.add("bomba");
+            tableauGrille[positionTireurShoot+1].classList.add("bomba");
+
+            tableauGrille[positionTireurShoot+20].classList.remove("bomba");
+            tableauGrille[positionTireurShoot+21].classList.remove("bomba");
+            tableauGrille[positionTireurShoot+19].classList.remove("bomba");
+
+            
+            if (positionTireurShoot < 20 && positionTireurShoot >= 0) {
+                tableauGrille[positionTireurShoot].classList.remove("bomba");
+                tableauGrille[positionTireurShoot+1].classList.remove("bomba");
+                tableauGrille[positionTireurShoot-1].classList.remove("bomba");
+                clearInterval(shoote);
+            }
+
+            if (alienHit3Bomba(positionTireurShoot)) {
+                tableauGrille[positionTireurShoot].classList.remove("bomba");
+                tableauGrille[positionTireurShoot+1].classList.remove("bomba");
+                tableauGrille[positionTireurShoot-1].classList.remove("bomba");
+
+                clearInterval(shoote);
+                removeHitAlien(positionTireurShoot-1);
+                removeHitAlien(positionTireurShoot+1);
+                removeHitAlien(positionTireurShoot);
+
+              
+
+                if(!finito){
+                    score+=300;
+                    afficheScore();
+                }
+
+            }
+            
+            if (alienRenforceHit3Bomba(positionTireurShoot)) {
+                tableauGrille[positionTireurShoot].classList.remove("bomba");
+                tableauGrille[positionTireurShoot+1].classList.remove("bomba");
+                tableauGrille[positionTireurShoot-1].classList.remove("bomba");
+
+                clearInterval(shoote);
+                removeHitReinforcedAlien(positionTireurShoot-1);
+                removeHitReinforcedAlien(positionTireurShoot+1);
+                removeHitReinforcedAlien(positionTireurShoot);
+                removeHitAlien(positionTireurShoot-1);
+                removeHitAlien(positionTireurShoot+1);
+                removeHitAlien(positionTireurShoot);
+              
+
+                if(!finito){
+                    score+=300;
+                    afficheScore();
+                }
+
+            }
+
+            if (alienTankHit3Bomba(positionTireurShoot)) {
+                tableauGrille[positionTireurShoot].classList.remove("bomba");
+                tableauGrille[positionTireurShoot+1].classList.remove("bomba");
+                tableauGrille[positionTireurShoot-1].classList.remove("bomba");
+
+                clearInterval(shoote);
+                removeHitTank(positionTireurShoot-1);
+                removeHitTank(positionTireurShoot+1);
+                removeHitTank(positionTireurShoot);
+                removeHitReinforcedAlien(positionTireurShoot-1);
+                removeHitReinforcedAlien(positionTireurShoot+1);
+                removeHitReinforcedAlien(positionTireurShoot);
+                removeHitAlien(positionTireurShoot-1);
+                removeHitAlien(positionTireurShoot+1);
+                removeHitAlien(positionTireurShoot);
+              
+
+                if(!finito){
+                    score+=300;
+                    afficheScore();
+                }
+
+            }
+
+
+
+
+            
+        }, 100);
+    }
+}
+use3bomba--;
+}
 
 function afficheVie(){
     var coeur1 = document.getElementById("first_heart");
@@ -516,7 +622,7 @@ function moov(event) {
         shoot();
         index = (index + 1) % 5;
         if(!finito){
-            score-=10;
+            score-=1;
             afficheScore();
         }
     }else if ((event.code === "KeyB")) {
@@ -546,62 +652,7 @@ function bestScores(){
     localStorage.setItem("bestScores", JSON.stringify(bestScores));
 }
 
-function setCapacite(){
-    var bombabomm = sessionStorage.getItem("3bomba");
-    if(bombabomm == sessionStorage.getItem("user") && use3bomba>0){
-        
-        var positionTireurShoot = whereTireur();
-        if (tableauGrille[positionTireurShoot].classList.contains("right_div")) {
-            
-        }else if (tableauGrille[positionTireurShoot].classList.contains("left_div")) {
-            
-        }else{
 
-        
-        var shoote = setInterval(function () {
-            tableauGrille[positionTireurShoot].classList.add("bomba");
-            tableauGrille[positionTireurShoot-1].classList.add("bomba");
-            tableauGrille[positionTireurShoot+1].classList.add("bomba");
-            positionTireurShoot-=20;
-            tableauGrille[positionTireurShoot].classList.add("bomba");
-            tableauGrille[positionTireurShoot-1].classList.add("bomba");
-            tableauGrille[positionTireurShoot+1].classList.add("bomba");
-
-            tableauGrille[positionTireurShoot+20].classList.remove("bomba");
-            tableauGrille[positionTireurShoot+21].classList.remove("bomba");
-            tableauGrille[positionTireurShoot+19].classList.remove("bomba");
-
-            
-            if (positionTireurShoot < 20 && positionTireurShoot >= 0) {
-                tableauGrille[positionTireurShoot].classList.remove("bomba");
-                tableauGrille[positionTireurShoot+1].classList.remove("bomba");
-                tableauGrille[positionTireurShoot-1].classList.remove("bomba");
-                clearInterval(shoote);
-            }
-
-            if (alienHit3Bomba(positionTireurShoot)||alienHit3Bomba(positionTireurShoot+1)||alienHit3Bomba(positionTireurShoot-1)) {
-                tableauGrille[positionTireurShoot].classList.remove("bomba");
-                tableauGrille[positionTireurShoot+1].classList.remove("bomba");
-                tableauGrille[positionTireurShoot-1].classList.remove("bomba");
-
-                clearInterval(shoote);
-                removeHitAlien(alien, positionTireurShoot-1);
-                removeHitAlien(alien, positionTireurShoot+1);
-                removeHitAlien(alien, positionTireurShoot);
-
-              
-
-                if(!finito){
-                    score+=300;
-                    afficheScore();
-                }
-            }
-            
-        }, 100);
-    }
-}
-use3bomba--;
-}
 
 function alienHit3Bomba(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
@@ -623,6 +674,62 @@ function alienHit3Bomba(positionTireurShoot) {
         tableauGrille[positionTireurShoot].classList.remove("alien");
         tableauGrille[positionTireurShoot-1].classList.remove("alien");
         tableauGrille[positionTireurShoot+1].classList.remove("alien");
+
+     
+        winMaybe();
+        return true;
+        
+    }
+}
+
+function alienRenforceHit3Bomba(positionTireurShoot) {
+    if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced")) {
+        if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced") && tableauGrille[positionTireurShoot+1].classList.contains("alienReinforced") && tableauGrille[positionTireurShoot-1].classList.contains("alienReinforced")){
+            boom3boomba(positionTireurShoot);
+            boom3boomba(positionTireurShoot+1);
+            boom3boomba(positionTireurShoot-1);
+        }else if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced") && tableauGrille[positionTireurShoot+1].classList.contains("alienReinforced")) {
+            boom3boomba(positionTireurShoot);
+            boom3boomba(positionTireurShoot+1);
+        }else if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced") && tableauGrille[positionTireurShoot-1].classList.contains("alienReinforced")) {
+            boom3boomba(positionTireurShoot);
+            boom3boomba(positionTireurShoot-1);
+        }
+  
+        tableauGrille[positionTireurShoot].classList.remove("bomba");
+        tableauGrille[positionTireurShoot-1].classList.remove("bomba");
+        tableauGrille[positionTireurShoot+1].classList.remove("bomba");
+        tableauGrille[positionTireurShoot].classList.remove("alienReinforced");
+        tableauGrille[positionTireurShoot-1].classList.remove("alienReinforced");
+        tableauGrille[positionTireurShoot+1].classList.remove("alienReinforced");
+
+     
+        winMaybe();
+        return true;
+        
+    }
+}
+
+function alienTankHit3Bomba(positionTireurShoot) {
+    if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat")) {
+        if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat") && tableauGrille[positionTireurShoot+1].classList.contains("wtfIsThat") && tableauGrille[positionTireurShoot-1].classList.contains("wtfIsThat")){
+            boom3boomba(positionTireurShoot);
+            boom3boomba(positionTireurShoot+1);
+            boom3boomba(positionTireurShoot-1);
+        }else if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat") && tableauGrille[positionTireurShoot+1].classList.contains("wtfIsThat")) {
+            boom3boomba(positionTireurShoot);
+            boom3boomba(positionTireurShoot+1);
+        }else if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat") && tableauGrille[positionTireurShoot-1].classList.contains("wtfIsThat")) {
+            boom3boomba(positionTireurShoot);
+            boom3boomba(positionTireurShoot-1);
+        }
+  
+        tableauGrille[positionTireurShoot].classList.remove("bomba");
+        tableauGrille[positionTireurShoot-1].classList.remove("bomba");
+        tableauGrille[positionTireurShoot+1].classList.remove("bomba");
+        tableauGrille[positionTireurShoot].classList.remove("wtfIsThat");
+        tableauGrille[positionTireurShoot-1].classList.remove("wtfIsThat");
+        tableauGrille[positionTireurShoot+1].classList.remove("wtfIsThat");
 
      
         winMaybe();
@@ -715,7 +822,7 @@ replayButtonLoose.onclick = function() {
 
 function raze(){
     var ultraze = sessionStorage.getItem("ultraze");
-    if(ultraze == sessionStorage.getItem("user") && use3bomba>0){
+    if(ultraze == sessionStorage.getItem("user") && useUltraze>0){
         
         
         tableauGrille[whereTireur()].classList.remove("tireur");
@@ -811,6 +918,78 @@ function raze(){
                     }
 
                 }
+
+                if (alienReinforcedHitRaze(lazerRaze-i) || alienReinforcedHitRaze(lazerRaze) || alienReinforcedHitRaze(lazerRaze+j)) {
+
+                    tableauGrille[lazerRaze].classList.remove("laserRaze");
+                    for (var h = 1; h <= 10; h++) {
+                        tableauGrille[lazerRaze-h].classList.remove("laserRaze");
+                    }
+                    for (var g = 1; g <= 9; g++) {
+                        tableauGrille[lazerRaze+g].classList.remove("laserRaze");
+                    }
+                    
+                    clearInterval(shoote);
+                    removeHitReinforcedAlien(alien, lazerRaze);
+                    removeHitReinforcedAlien(alien, lazerRaze-i);
+                    removeHitReinforcedAlien(alien, lazerRaze+j);
+                    removeHitAlien(alien, lazerRaze);
+                    removeHitAlien(alien, lazerRaze-i);
+                    removeHitAlien(alien, lazerRaze+j);
+                
+
+                    if(!finito){
+                        score+=300;
+                        afficheScore();
+                    }
+                    
+                    tableauGrille[positionTireurRaze].classList.remove("canonRaze");
+                    for (var u = 1; u <= 10; u++) {
+                        tableauGrille[positionTireurRaze-u].classList.remove("canonRaze");
+                    }
+                    for (var l = 1; l <= 9; l++) {
+                        tableauGrille[positionTireurRaze+l].classList.remove("canonRaze");
+                    }
+
+                }
+
+
+                if (alienTankHitRaze(lazerRaze-i) || alienTankHitRaze(lazerRaze) || alienTankHitRaze(lazerRaze+j)) {
+
+                    tableauGrille[lazerRaze].classList.remove("laserRaze");
+                    for (var h = 1; h <= 10; h++) {
+                        tableauGrille[lazerRaze-h].classList.remove("laserRaze");
+                    }
+                    for (var g = 1; g <= 9; g++) {
+                        tableauGrille[lazerRaze+g].classList.remove("laserRaze");
+                    }
+                    
+                    clearInterval(shoote);
+                    removeHitTank(alien, lazerRaze);
+                    removeHitTank(alien, lazerRaze-i);
+                    removeHitTank(alien, lazerRaze+j);
+                    removeHitReinforcedAlien(alien, lazerRaze);
+                    removeHitReinforcedAlien(alien, lazerRaze-i);
+                    removeHitReinforcedAlien(alien, lazerRaze+j);
+                    removeHitAlien(alien, lazerRaze);
+                    removeHitAlien(alien, lazerRaze-i);
+                    removeHitAlien(alien, lazerRaze+j);
+                
+
+                    if(!finito){
+                        score+=300;
+                        afficheScore();
+                    }
+                    
+                    tableauGrille[positionTireurRaze].classList.remove("canonRaze");
+                    for (var u = 1; u <= 10; u++) {
+                        tableauGrille[positionTireurRaze-u].classList.remove("canonRaze");
+                    }
+                    for (var l = 1; l <= 9; l++) {
+                        tableauGrille[positionTireurRaze+l].classList.remove("canonRaze");
+                    }
+
+                }
             }
         }
             
@@ -822,8 +1001,6 @@ useUltraze--;
     
 }
 
-
-
 function alienHitRaze(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
         boomraze(positionTireurShoot);
@@ -831,6 +1008,36 @@ function alienHitRaze(positionTireurShoot) {
         tableauGrille[positionTireurShoot].classList.remove("boomraze");
        
         tableauGrille[positionTireurShoot].classList.remove("alien");
+       
+     
+        winMaybe();
+        return true;
+        
+    }
+}
+
+function alienReinforcedHitRaze(positionTireurShoot) {
+    if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced")) {
+        boomraze(positionTireurShoot);
+
+        tableauGrille[positionTireurShoot].classList.remove("boomraze");
+       
+        tableauGrille[positionTireurShoot].classList.remove("alienReinforced");
+       
+     
+        winMaybe();
+        return true;
+        
+    }
+}
+
+function alienTankHitRaze(positionTireurShoot) {
+    if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat")) {
+        boomraze(positionTireurShoot);
+
+        tableauGrille[positionTireurShoot].classList.remove("boomraze");
+       
+        tableauGrille[positionTireurShoot].classList.remove("wtfIsThat");
        
      
         winMaybe();
