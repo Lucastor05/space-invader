@@ -1,4 +1,5 @@
 const grille = document.querySelector(".grille");
+const cursorEffetsSonores = document.getElementById("volumeEffets");
 const difficulty = parseInt(sessionStorage.getItem("difficulty"));
 const tableauGrille = grille.children;
 var proba = 0.01;
@@ -572,7 +573,7 @@ var positionTireur = whereTireur();
 
 if(difficulty == 1){
     proba = 0.5;
-    vitesseAlien = 700;
+    vitesseAlien = 11100;
     nombreVie = 1;
     alienRenforce = [];
 }else if(difficulty == 2){
@@ -641,6 +642,21 @@ function moov(event) {
     checkbombeandalien();
 });
 
+
+cursorEffetsSonores.addEventListener("click", function() {
+    for (let i = 0; i < 10; i++) {
+        blaster[i].volume = cursorEffetsSonores.value/1.2; 
+    }
+    
+});
+
+const music = document.getElementById("musicVolum");
+const audio = document.getElementById("myAudio");
+audio.volume = 0.025;
+
+music.addEventListener("click", function() {
+    audio.volume = music.value/1.2; 
+});
 
 function bestScores(){
     var username = sessionStorage.getItem("user");
@@ -761,6 +777,8 @@ var modal = document.getElementById("myModalWin");
 var modalLoose = document.getElementById("myModalLoose");
 
 var scoree = document.getElementById("final-score");
+scoree.innerHTML =0 ;
+
 var scoreLoose = document.getElementById("final-scoreLoose");
 
 var replayButton = document.getElementById("replay-button");

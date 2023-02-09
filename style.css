@@ -2,7 +2,8 @@
 .grille {
     display: flex;
     flex-wrap: wrap;
-    border: 1px solid #ffffff;
+    border: 1px solid #ffff00;
+    border-radius: 10px;
     width: 500px;
     height: 500px;
     margin: 0 auto;
@@ -12,6 +13,20 @@
 
 }
 
+h1{
+  align-items: start;
+  position: absolute;
+  left: 2%;
+  top: 2%;
+
+}
+
+h1 img{
+  height: 100px;
+  width: auto;
+}
+
+
 @keyframes background-defile {
     from {
         background-position-y: 0px;
@@ -20,10 +35,21 @@
         background-position-y: 256px;
     }
 }
+.container-h3{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
 
 h3 {
-    text-align: center;
     margin: 20px 0;
+    border: #ffff00 solid;
+    border-radius: 10px;
+    width: 500px;
+    margin-top: 100px;
+
+
 }
 .grille div {
     width: 25px;
@@ -104,29 +130,70 @@ body {
     font-size: 15px;
     margin-bottom: 10px;
 }
-  
+
+.background-music{
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  top: 20%;
+  left: 5%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 #myAudio {
     width: 10%;
+    
+}
+.background-music div{
+  color: #ffff00;
+  padding: 20px;
+  border: #ffff00 solid;
+  border-radius: 10px;
+
 }
   
 #musicVolum {
-    width: 10%;
+    width: 90%;
     height: 25px;
-    background-color: #ddd;
+    background-color: transparent;
     appearance: none;
     outline: none;
     border-radius: 25px;
     padding-left: 10px;
     padding-right: 10px;
+    border: solid #ffff00;
 }
   
 #musicVolum::-webkit-slider-thumb {
-    width: 20px;
-    height: 20px;
-    background-color: #333;
+    width: 15px;
+    height: 15px;
+    background-color: #ffff00;
     border-radius: 50%;
     cursor: pointer;
     appearance: none;
+}
+
+#volumeEffets {
+  width: 90%;
+  height: 25px;
+  background-color: transparent;
+  appearance: none;
+  outline: none;
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: solid #ffff00;
+}
+
+#volumeEffets::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  background-color: #ffff00;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
 }
 
 .lifeBar{
@@ -154,7 +221,8 @@ svg{
   flex-direction: column;
   justify-content: center;
   background-color: #ffffff;
-  border: 1px solid #888;
+  border: #ffff00 solid;
+  border-radius: 10px;
   width: 500px;
   height: 620px;
 }
@@ -167,12 +235,17 @@ svg{
   border: 1px solid #888;
   width: 700px;
   height: 700px;
+  border: #ffff00 solid;
+  border-radius: 10px;
+
 }
 
   .text-container{
     display: flex;
     flex-direction: row;
     gap: 15px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     font-size: larger;
     align-items: center;
     text-align: center;
@@ -240,6 +313,8 @@ svg{
     align-items: center;
     background: url("ressources/background-black.png");
     animation: background-defile 10s linear infinite;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
 
   }
   
@@ -267,7 +342,9 @@ svg{
     padding-top: 5%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgb(0, 0, 0, 0.5);
+    border: #ffff00 solid;
+
     color: black;
   }  
 .lifeBar{
@@ -302,7 +379,7 @@ svg{
     padding-top: 4%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgb(0, 0, 0, 0.5);
     color: black;
   }  
 
@@ -312,6 +389,11 @@ svg{
   align-items: center;
   color: gray;
   font-style: italic;
+  width: 425px;
+  height: 500px;
+  position: absolute;
+  top: 30%;
+  right: 0;
 
 }
 
@@ -339,6 +421,7 @@ svg{
   display: flex;
   flex-direction: row;
   gap: 20px;
+  width: 100%;
   align-items: center;
   text-align: center;
 }
