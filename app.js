@@ -899,9 +899,9 @@ function raze(){
                     }
                     
                     clearInterval(shoote);
-                    removeHitAlien(alien, lazerRaze);
-                    removeHitAlien(alien, lazerRaze-i);
-                    removeHitAlien(alien, lazerRaze+j);
+                    removeHitAlien(lazerRaze);
+                    removeHitAlien(lazerRaze-i);
+                    removeHitAlien(lazerRaze+j);
                 
 
                     if(!finito){
@@ -930,12 +930,12 @@ function raze(){
                     }
                     
                     clearInterval(shoote);
-                    removeHitReinforcedAlien(alien, lazerRaze);
-                    removeHitReinforcedAlien(alien, lazerRaze-i);
-                    removeHitReinforcedAlien(alien, lazerRaze+j);
-                    removeHitAlien(alien, lazerRaze);
-                    removeHitAlien(alien, lazerRaze-i);
-                    removeHitAlien(alien, lazerRaze+j);
+                    removeHitReinforcedAlien(lazerRaze);
+                    removeHitReinforcedAlien(lazerRaze-i);
+                    removeHitReinforcedAlien(lazerRaze+j);
+                    removeHitAlien(lazerRaze);
+                    removeHitAlien(lazerRaze-i);
+                    removeHitAlien(lazerRaze+j);
                 
 
                     if(!finito){
@@ -965,15 +965,18 @@ function raze(){
                     }
                     
                     clearInterval(shoote);
-                    removeHitTank(alien, lazerRaze);
-                    removeHitTank(alien, lazerRaze-i);
-                    removeHitTank(alien, lazerRaze+j);
-                    removeHitReinforcedAlien(alien, lazerRaze);
-                    removeHitReinforcedAlien(alien, lazerRaze-i);
-                    removeHitReinforcedAlien(alien, lazerRaze+j);
-                    removeHitAlien(alien, lazerRaze);
-                    removeHitAlien(alien, lazerRaze-i);
-                    removeHitAlien(alien, lazerRaze+j);
+                    removeHitTank(lazerRaze);
+                    removeHitTank(lazerRaze-i);
+                    removeHitTank(lazerRaze+j);
+                    removeHitAlien(lazerRaze);
+                    removeHitAlien(lazerRaze-i);
+                    removeHitAlien(lazerRaze+j);
+                    removeHitReinforcedAlien(lazerRaze);
+                    removeHitReinforcedAlien(lazerRaze-i);
+                    removeHitReinforcedAlien(lazerRaze+j);
+                    removeHitAlien(lazerRaze);
+                    removeHitAlien(lazerRaze-i);
+                    removeHitAlien(lazerRaze+j);
                 
 
                     if(!finito){
