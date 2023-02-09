@@ -131,13 +131,6 @@ svg{
 }
 
 
-.modal{
-  background-color: red;
-  overflow: 0;
-  
-}
-
-
 .modal-content {
     display: flex;
     flex-direction: column;
