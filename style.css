@@ -92,8 +92,9 @@ h3 {
 body {
 
     color: #fff;
-    background: url(ressources/background-black.png);
+    background: url(ressources/wp3493594.webp);
     animation: background-defile 10s linear infinite;
+    background-color: black;
 
 
 }
@@ -304,3 +305,40 @@ svg{
     background-color: rgba(0, 0, 0, 0.4);
     color: black;
   }  
+
+.tuto{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: gray;
+  font-style: italic;
+
+}
+
+.deplacement-control svg{
+  width: 150px;
+  height: 150px;
+  fill: grey;
+}
+
+.deplacement-control{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+
+}
+
+.deplacement-control p{
+  font-size: 50px;
+}
+
+
+.shoot-ult-control{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+}
