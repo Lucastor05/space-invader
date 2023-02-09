@@ -12,7 +12,11 @@ submitBtn.addEventListener("click", function(event) {
   if (user == ""){
     alert("Veuillez entrer un pseudonyme");
   }else{
-    gameModes.classList.remove("hidden");
+    if(gameModes.classList.contains("hidden")){
+      gameModes.classList.remove("hidden");
+    }else{
+      gameModes.classList.add("hidden");
+    }
     sessionStorage.setItem("user", user);
   }
 });
@@ -70,14 +74,23 @@ function updateScoreList() {
         return b.score - a.score;
     });
 
-    var list = document.querySelector("ul");
+    var list = document.querySelector("ol");
     list.innerHTML = "";
 
     scores.forEach(function (entry) {
-        var item = document.createElement("li");
-        item.innerHTML = entry.username + ": " + entry.score;
-        list.appendChild(item);
-    });
+      var item = document.createElement("li");
+      var usernameDiv = document.createElement("div");
+      usernameDiv.classList.add("usernameScore");
+      usernameDiv.innerHTML = entry.username;
+      item.appendChild(usernameDiv);
+  
+      var scoreDiv = document.createElement("div");
+      scoreDiv.classList.add("ScoreInScoreboard");
+      scoreDiv.innerHTML = entry.score;
+      item.appendChild(scoreDiv);
+  
+      list.appendChild(item);
+  });
 }
 
 updateScoreList();
