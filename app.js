@@ -14,6 +14,7 @@ var blaster = [];
 var index = 0;
 var nombreVie = 0;
 var use3bomba = 3;
+var useUltraze = 1;
 for (let i = 0; i < 10; i++) {
     blaster[i] = new Audio("ressources/blaster.mp3");
     blaster[i].volume = 0.01;
@@ -524,6 +525,12 @@ function moov(event) {
             score-=10;
             afficheScore();
         }
+    }else if ((event.code === "KeyV")) {
+        raze();
+        if(!finito){
+            score-=10;
+            afficheScore();
+        }
     }
     checkbombeandalien();
 });
@@ -695,6 +702,157 @@ replayButtonLoose.onclick = function() {
     // code to quit the game
   };
 
+
+
+
+
+
+
+
+
+
+
+
+function raze(){
+    var ultraze = sessionStorage.getItem("ultraze");
+    if(ultraze == sessionStorage.getItem("user") && use3bomba>0){
+        
+        
+        tableauGrille[whereTireur()].classList.remove("tireur");
+        tableauGrille[230].classList.add("tireur");
+        positionTireur = 230;
+        var positionTireurRaze= 230;
+        var lazerRaze = whereTireur();
+
+        positionTireurRaze-=20;
+        lazerRaze-=20;
+        tableauGrille[positionTireurRaze].classList.add("canonRaze");
+        for (var i = 1; i <= 10; i++) {
+            tableauGrille[positionTireurRaze-i].classList.add("canonRaze");
+        }
+        for (var i = 1; i <= 9; i++) {
+            tableauGrille[positionTireurRaze+i].classList.add("canonRaze");
+        }
+        var shoote = setInterval(function () {
+
+            
+            tableauGrille[lazerRaze].classList.add("laserRaze");
+            for (var i = 1; i <= 10; i++) {
+                tableauGrille[lazerRaze-i].classList.add("laserRaze");
+            }
+            for (var i = 1; i <= 9; i++) {
+                tableauGrille[lazerRaze+i].classList.add("laserRaze");
+            }
+
+            lazerRaze-=20;
+            tableauGrille[lazerRaze].classList.add("laserRaze");
+            for (var i = 1; i <= 10; i++) {
+                tableauGrille[lazerRaze-i].classList.add("laserRaze");
+            }
+            for (var i = 1; i <= 9; i++) {
+                tableauGrille[lazerRaze+i].classList.add("laserRaze");
+            }
+            
+            tableauGrille[lazerRaze+20].classList.remove("laserRaze");
+            for (var i = 1; i <= 10; i++) {
+                tableauGrille[lazerRaze+20-i].classList.remove("laserRaze");
+            }
+            for (var i = 1; i <= 9; i++) {
+                tableauGrille[lazerRaze+20+i].classList.remove("laserRaze");
+            }
+
+
+
+
+
+
+            
+            if (lazerRaze < 20 && lazerRaze >= 0) {
+            tableauGrille[lazerRaze].classList.remove("laserRaze");
+
+                for (var i = 1; i <= 10; i++) {
+                    tableauGrille[lazerRaze-i].classList.remove("laserRaze");
+                }
+                for (var i = 1; i <= 9; i++) {
+                    tableauGrille[lazerRaze+i].classList.remove("laserRaze");
+                }
+                clearInterval(shoote);
+            }
+            for (var i = 1; i <= 10; i++) {
+                for (var j = 1; j <= 9; j++) {
+
+                if (alienHitRaze(lazerRaze-i) || alienHitRaze(lazerRaze) || alienHitRaze(lazerRaze+j)) {
+
+                    tableauGrille[lazerRaze].classList.remove("laserRaze");
+                    for (var h = 1; h <= 10; h++) {
+                        tableauGrille[lazerRaze-h].classList.remove("laserRaze");
+                    }
+                    for (var g = 1; g <= 9; g++) {
+                        tableauGrille[lazerRaze+g].classList.remove("laserRaze");
+                    }
+                    
+                    clearInterval(shoote);
+                    removeHitAlien(alien, lazerRaze);
+                    removeHitAlien(alien, lazerRaze-i);
+                    removeHitAlien(alien, lazerRaze+j);
+                
+
+                    if(!finito){
+                        score+=300;
+                        afficheScore();
+                    }
+                    
+                    tableauGrille[positionTireurRaze].classList.remove("canonRaze");
+                    for (var u = 1; u <= 10; u++) {
+                        tableauGrille[positionTireurRaze-u].classList.remove("canonRaze");
+                    }
+                    for (var l = 1; l <= 9; l++) {
+                        tableauGrille[positionTireurRaze+l].classList.remove("canonRaze");
+                    }
+
+                }
+            }
+        }
+            
+        }, 100);
+
+    }
+    
+useUltraze--;
+    
+}
+
+
+
+function alienHitRaze(positionTireurShoot) {
+    if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
+        boomraze(positionTireurShoot);
+
+        tableauGrille[positionTireurShoot].classList.remove("boomraze");
+       
+        tableauGrille[positionTireurShoot].classList.remove("alien");
+       
+     
+        winMaybe();
+        return true;
+        
+    }
+}
+    
+function boomraze(positionTireurShoot) {
+    var i=0;
+    var bimbamboom =setInterval(function () {
+
+        tableauGrille[positionTireurShoot].classList.add("boomraze");
+        if (i == 2) {
+            tableauGrille[positionTireurShoot].classList.remove("boomraze");
+            clearInterval(bimbamboom);
+
+        }
+        i+=1;
+    }, 100);
+
+}
 
 
 /*setInterval(function () {
