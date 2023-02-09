@@ -1,6 +1,5 @@
-
-const difficulty = parseInt(sessionStorage.getItem("difficulty"));
 const grille = document.querySelector(".grille");
+const difficulty = parseInt(sessionStorage.getItem("difficulty"));
 const tableauGrille = grille.children;
 var proba = 0.01;
 var vitessShootAlien = 700;
@@ -22,83 +21,29 @@ for (let i = 0; i < 10; i++) {
 
 /*FONCTIONS*/
 
-function removeHitAlien(value) {
-    for (var i = 0; i < alien.length; i++) {
-        if (alien[i] === value) {
-          alien.splice(i, 1);
-          break;
-        }
-      }
-}
-function removeHitReinforcedAlien(value) {
-    for (var i = 0; i < alienRenforce.length; i++) {
-        if (alienRenforce[i] === value) {
-            alienRenforce.splice(i, 1);
-          break;
-        }
-      }
-}
-function removeHitTank(value) {
-    for (var i = 0; i < wtfIsThat.length; i++) {
-        if (wtfIsThat[i] === value) {
-            wtfIsThat.splice(i, 1);
+function removeHitAlien(tab, value) {
+    for (var i = 0; i < tab.length; i++) {
+        if (tab[i] === value) {
+          tab.splice(i, 1);
           break;
         }
       }
 }
 
-function removeAlien(){
-    wtfIsThat.forEach(element => {
-        if(tableauGrille[element]){
-            tableauGrille[element].classList.remove("wtfIsThat");
-        }
-    });
-
-    alienRenforce.forEach(element => {
-        if(tableauGrille[element]){
-            if(!tableauGrille[element].classList.contains("wtfIsThat")){
-                tableauGrille[element].classList.remove("alienReinforced");
-
-            }
-        }
-    });
-
-    alien.forEach(element => {
-        if(tableauGrille[element]){
-            if(!tableauGrille[element].classList.contains("alienReinforced") && !tableauGrille[element].classList.contains("wtfIsThat")){
-                tableauGrille[element].classList.remove("alien");
-            }
-        }
+function removeAlien(tableau, grid){
+    tableau.forEach(element => {
+        grid[element].classList.remove("alien");
     });
 }
 
-function setAlien(){
-    wtfIsThat.forEach(element => {
-        if(tableauGrille[element]){
-            tableauGrille[element].classList.add("wtfIsThat");
-        }
-    });
-
-    alienRenforce.forEach(element => {
-        if(tableauGrille[element]){
-            if(!tableauGrille[element].classList.contains("wtfIsThat")){
-                tableauGrille[element].classList.add("alienReinforced");
-
-            }
-        }
-    });
-
-    alien.forEach(element => {
-        if(tableauGrille[element]){
-            if(!tableauGrille[element].classList.contains("alienReinforced") && !tableauGrille[element].classList.contains("wtfIsThat")){
-                tableauGrille[element].classList.add("alien");
-            }
-        }
+function setAlien(tableau, grid){
+    tableau.forEach(element => {
+        grid[element].classList.add("alien");
     });
 }
 
 function moveAlien(){
-    removeAlien();
+    removeAlien(alien, tableauGrille);
 
     var isRight = false;
     var isLeft = false;
@@ -111,7 +56,7 @@ function moveAlien(){
         }
         
         if(element == 220){
-            alert("You loose :(");
+            loose();
             clearInterval(interval1);
         }
         if(shouldFireLaser()){
@@ -120,19 +65,9 @@ function moveAlien(){
     });
 
 
-
     if(isRight || isLeft){
         for (let i = 0; i < alien.length; i++) {
             alien[i]+=20;
-            
-        }
-        for (let i = 0; i < alienRenforce.length; i++) {
-            alienRenforce[i]+=20;
-            
-        }
-        for (let i = 0; i < wtfIsThat.length; i++) {
-            wtfIsThat[i]+=20;
-            
         }
 
         if(isRight){
@@ -147,18 +82,16 @@ function moveAlien(){
             alien[i]+=direction;
             wasOnSide = false
         }
-        for (let i = 0; i < alienRenforce.length; i++) {
-            alienRenforce[i]+=direction;
-            wasOnSide = false
-        }
-        for (let i = 0; i < wtfIsThat.length; i++) {
-            wtfIsThat[i]+=direction;
-            wasOnSide = false
-        }
     }
 
-    setAlien();
+    setAlien(alien, tableauGrille);
     loose();
+}
+
+function shouldFireLaser() {
+    
+    let nb = Math.floor(Math.random() * 101);
+    return nb < proba;
 }
 
 function shouldFireLaser() {
@@ -190,14 +123,16 @@ function boom(positionTireurShoot) {
 
 }
 function checkbombeandalien() {
+    console.log("check");
     if(tableauGrille[whereTireur()].classList.contains("alien") || tableauGrille[whereTireur()].classList.contains("boom")){
+    console.log("cheaaaaaaaaaaaaaaaaaaaaaaaaaaack");
         loose();
     }
     
 }
 function loose() {
     if(!finito){
-        if (tableauGrille[whereTireur()].classList.contains("alien")||tableauGrille[whereTireur()].classList.contains("alienReinforced")) {
+        if (tableauGrille[whereTireur()].classList.contains("alien")) {
             if(nombreVie == 1){
                 finito = true;
                 clearInterval(interval1);
@@ -216,7 +151,7 @@ function loose() {
 function winMaybe() {
     var win = 0;
     for (let i = 0; i < 240; i++) {
-        if (tableauGrille[i].classList.contains("alien") || tableauGrille[i].classList.contains("alienReinforced") || tableauGrille[i].classList.contains("wtfIsThat")) {
+        if (tableauGrille[i].classList.contains("alien")) {
             win+=1;
         }
     }
@@ -268,40 +203,15 @@ function shoot() {
             clearInterval(shoot);
         }
 
-        
-
         if (alienHit(positionTireurShoot)) {
             tableauGrille[positionTireurShoot].classList.remove("laser");
             clearInterval(shoot);
-            removeHitAlien(positionTireurShoot);
+            removeHitAlien(alien, positionTireurShoot);
             if(!finito){
                 score+=10;
                 afficheScore();
             }
         }
-
-        if (alienReinforcedHit(positionTireurShoot)) {
-            tableauGrille[positionTireurShoot].classList.remove("laser");
-            clearInterval(shoot);
-            removeHitReinforcedAlien(positionTireurShoot)
-            if(!finito){
-                score+=10;
-                afficheScore();
-            }
-        }
-
-        if (wtfIsThatHit(positionTireurShoot)) {
-            tableauGrille[positionTireurShoot].classList.remove("laser");
-            clearInterval(shoot);
-            removeHitTank(positionTireurShoot)
-            if(!finito){
-                score+=10;
-                afficheScore();
-            }
-        }
-
-        
-
 
         /*if (tableauGrille[positionTireurShoot].classList.contains("laserAlien")) {
             tableauGrille[positionTireurShoot].classList.remove("laserAlien");
@@ -360,12 +270,15 @@ function AlienAreShootingBackWTF(element) {
             clearInterval(shoot);
             
 
+            
+
             if(nombreVie == 1){
                 showModal(score);
                 clearInterval(interval1);
             }else{
                 nombreVie--;
                 afficheVie();
+                tableauGrille[positionTireurShoot].classList.add("tireur");
             }
 
         }
@@ -383,30 +296,6 @@ function alienHit(positionTireurShoot) {
         winMaybe();
         return true;
         
-    }
-}
-
-function alienReinforcedHit(positionTireurShoot) {
-    if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced")) {
-        tableauGrille[positionTireurShoot].classList.remove("alienReinforced");
-        tableauGrille[positionTireurShoot].classList.remove("laser");
-        tableauGrille[positionTireurShoot].classList.add("alien");
-        boom(positionTireurShoot);
-        winMaybe();
-        return true;
-     
-    }
-}
-
-function wtfIsThatHit(positionTireurShoot) {
-    if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat")) {
-        tableauGrille[positionTireurShoot].classList.remove("wtfIsThat");
-        tableauGrille[positionTireurShoot].classList.remove("laser");
-        tableauGrille[positionTireurShoot].classList.add("alienReinforced");
-        boom(positionTireurShoot);
-        winMaybe();
-        return true;
-     
     }
 }
 
@@ -445,10 +334,6 @@ for (let pas = 1; pas <241; pas++) {
 
 tableauGrille[230].classList.add("tireur");
 var alien = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
-var alienRenforce = [];
-var wtfIsThat = [];
-
-
 var direction = 1;
 var wasOnSide = true;
 var positionTireur = whereTireur();
@@ -465,28 +350,24 @@ if(difficulty == 1){
     proba = 0.5;
     vitesseAlien = 700;
     nombreVie = 1;
-    alienRenforce = [];
+    reinforcedProba= 0.1;
 }else if(difficulty == 2){
     proba = 2;
     vitesseAlien = 500;
     nombreVie = 2;
     reinforcedProba= 0.1;
-    alienRenforce = [0,1,2,3,4,5,6,7,8,9,10,11];
 }else if(difficulty == 3){
     proba = 5;
     vitesseAlien = 300;
     nombreVie = 3;
     reinforcedProba= 0.1;
-    alienRenforce = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31];
-    wtfIsThat = [0,1,2,3,4,5,6,7,8,9,10,11];
-
 }else{
     document.location.href="menu.html"; 
 }
 
 
 
-afficheVie()
+
 afficheVie();
 setAlien(alien, tableauGrille);
 var interval1 = setInterval(moveAlien, vitesseAlien);
@@ -495,22 +376,18 @@ function moov(event) {
     if (event.code === "ArrowLeft" || event.code === "KeyA") {
         if (!tableauGrille[positionTireur].classList.contains("left_div")) {
             moovLeft();
-            checkbombeandalien()
         }
     } else if (event.code === "ArrowRight" || event.code === "KeyD") {
         if (!tableauGrille[positionTireur].classList.contains("right_div")) {
             moovRight();
-            checkbombeandalien()
         }
     }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > min ) {
         if (!tableauGrille[positionTireur].classList.contains("top_div")) {
             moovUp();  
-            checkbombeandalien()
         }
         
     }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
         moovDown();
-        checkbombeandalien()
     }else if ((event.code === "Space")) {
         blaster[index].currentTime = 0;
         blaster[index].play();
@@ -521,6 +398,7 @@ function moov(event) {
             afficheScore();
         }
     }
+    checkbombeandalien();
 });
 
 
