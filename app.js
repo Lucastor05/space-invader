@@ -573,7 +573,7 @@ var positionTireur = whereTireur();
 
 if(difficulty == 1){
     proba = 0.5;
-    vitesseAlien = 11100;
+    vitesseAlien = 700;
     nombreVie = 1;
     alienRenforce = [];
 }else if(difficulty == 2){
