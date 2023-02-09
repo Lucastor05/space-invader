@@ -42,17 +42,16 @@ h3 {
 }
 
 .alienReinforced{
-    background: url(ressources/vaisseau.png);
-    transform: rotate(180deg);
+    background: url(ressources/reinforcedAlien.png);
+    background-size: cover;
     background-position: center;
     background-size: contain;
 }
 
 .wtfIsThat{
-    background: url(ressources/boom.png);
-    transform: rotate(180deg);
+    background: url(ressources/tank.png);
     background-position: center;
-    background-size: contain;
+    background-size: cover;
 }
 
 
@@ -132,14 +131,83 @@ svg{
 }
 
 
+.modal{
+  background-color: red;
+  overflow: 0;
+  
+}
+
 
 .modal-content {
-    background-color: #fefefe;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
     margin: 15% auto;
-    padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 500px;
+    height: 620px;
   }
+
+  .text-container{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    font-size: larger;
+    align-items: center;
+    text-align: center;
+    background: url("ressources/background-black.png");
+    animation: background-defile 10s linear infinite;
+    justify-content: center;
+    color: #ffffff;
+    
+  }
+
+  
+  .text-container img{
+    height: 30px;
+    width: 30px;
+    rotate: 90deg;
+  }
+
+
+  .image-container{
+    
+    background: url("ressources/omg-wow.gif");
+    background-size: contain;
+    height: 90%;
+    margin: 0;
+    
+  }
+
+  .modal-contentLoose {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ffffff;
+    margin: 15% auto;
+    border: 1px solid #888;
+    width: 700px;
+    height: 700px;
+  }
+
+  .image-containerLoose{
+    
+    background: url("ressources/background-black.png");
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  .image-containerLoose svg{
+    
+    width: 80%;
+    height: 100%;
+    
+  }
+  
+
   
   .close {
     color: #aaa;
@@ -154,12 +222,26 @@ svg{
     text-decoration: none;
     cursor: pointer;
   }
+
+  .button-contianer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: url("ressources/background-black.png");
+    animation: background-defile 10s linear infinite;
+
+  }
   
   button {
     padding: 10px 20px;
+    width: 100%;
     margin: 10px;
     font-size: 16px;
     border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
   }
   .modal {
     display: none;

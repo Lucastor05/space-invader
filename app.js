@@ -111,7 +111,7 @@ function moveAlien(){
         }
         
         if(element == 220){
-            alert("You loose :(");
+            showModalLoose(score);
             clearInterval(interval1);
         }
         if(shouldFireLaser()){
@@ -194,7 +194,7 @@ function loose() {
     if(!finito){
         if (tableauGrille[whereTireur()].classList.contains("alien")||tableauGrille[whereTireur()].classList.contains("alienReinforced")) {
             if(nombreVie == 1){
-                alert("You loose");
+                showModalLoose(score);
                 finito = true;
                 clearInterval(interval1);
             }else{
@@ -356,7 +356,7 @@ function AlienAreShootingBackWTF(element) {
             
 
             if(nombreVie == 1){
-                alert("You loose :(");
+                showModalLoose(score);
                 clearInterval(interval1);
             }else{
                 nombreVie--;
@@ -407,7 +407,6 @@ function wtfIsThatHit(positionTireurShoot) {
 
 function ShipnHit(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("tireur")) {
-        tableauGrille[positionTireurShoot].classList.remove("tireur");
         tableauGrille[positionTireurShoot].classList.remove("laser");
         boom(positionTireurShoot);
         return true;
@@ -531,18 +530,32 @@ function bestScores(){
 
 
 
-var modal = document.getElementById("myModal");
+var modal = document.getElementById("myModalWin");
+var modalLoose = document.getElementById("myModalLoose");
+
 var scoree = document.getElementById("final-score");
+var scoreLoose = document.getElementById("final-scoreLoose");
+
 var replayButton = document.getElementById("replay-button");
 var quitButton = document.getElementById("quit-button");
+var replayButtonLoose = document.getElementById("replay-buttonLoose");
+var quitButtonLoose = document.getElementById("quit-buttonLoose");
 
 function showModal(score) {
   modal.style.display = "block";
   scoree.innerHTML =score;
 }
 
+function showModalLoose(score) {
+    modalLoose.style.display = "block";
+    scoreLoose.innerHTML =score;
+    console.log(scoreLoose.innerHTML);
+
+  }
+
 function hideModal() {
   modal.style.display = "none";
+  modalLoose.style.display = "none";
 }
 
 replayButton.onclick = function() {
@@ -556,6 +569,18 @@ quitButton.onclick = function() {
 document.location.href="menu.html";
   // code to quit the game
 };
+
+replayButtonLoose.onclick = function() {
+    hideModal();
+    window.location.reload()
+    // code to restart the game
+  };
+  
+  quitButtonLoose.onclick = function() {
+    hideModal();
+  document.location.href="menu.html";
+    // code to quit the game
+  };
 
 
 
