@@ -11,7 +11,7 @@ submitBtn.addEventListener("click", function(event) {
             score = bestscore[username];
         }
     }
-    if (parseInt(score) > 250) {
+    if (parseInt(score) > 2500) {
         sessionStorage.setItem("3bomba", user);
     }else{
         alert("Vous n'avez pas assez de points pour acheter cette bombe");

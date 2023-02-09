@@ -143,6 +143,7 @@ function loose() {
                 showModal(score);
             }else{
                 nombreVie--;
+                score-=10;
                 afficheVie()
                 tableauGrille[whereTireur()].classList.remove("tireur");
                 tableauGrille[230].classList.add("tireur");
@@ -213,7 +214,7 @@ function shoot() {
             clearInterval(shoot);
             removeHitAlien(alien, positionTireurShoot);
             if(!finito){
-                score+=10;
+                score+=100;
                 afficheScore();
             }
         }
@@ -398,13 +399,13 @@ function moov(event) {
         shoot();
         index = (index + 1) % 5;
         if(!finito){
-            score--;
+            score-=10;
             afficheScore();
         }
     }else if ((event.code === "KeyB")) {
         setCapacite();
         if(!finito){
-            score--;
+            score-=10;
             afficheScore();
         }
     }
@@ -468,7 +469,7 @@ function setCapacite(){
               
 
                 if(!finito){
-                    score+=10;
+                    score+=300;
                     afficheScore();
                 }
             }
