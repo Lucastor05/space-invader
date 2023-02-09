@@ -17,7 +17,7 @@
         background-position-y: 0px;
     }
     to {
-        background-position-y: 256px;
+        background-position-y: 10000px;
     }
 }
 
@@ -95,6 +95,7 @@ body {
     background: url(ressources/wp3493594.webp);
     animation: background-defile 10s linear infinite;
     background-color: black;
+    animation: background-defile 5s linear infinite;
 
 
 }
