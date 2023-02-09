@@ -122,7 +122,12 @@ function boom(positionTireurShoot) {
     }, 100);
 
 }
-
+function checkbombeandalien() {
+    if(tableauGrille[whereTireur()].classList.contains("alien") || tableauGrille[whereTireur()].classList.contains("boom")){
+        loose();
+    }
+    
+}
 function loose() {
     if(!finito){
         if (tableauGrille[whereTireur()].classList.contains("alien")) {
@@ -366,18 +371,22 @@ function moov(event) {
     if (event.code === "ArrowLeft" || event.code === "KeyA") {
         if (!tableauGrille[positionTireur].classList.contains("left_div")) {
             moovLeft();
+            checkbombeandalien()
         }
     } else if (event.code === "ArrowRight" || event.code === "KeyD") {
         if (!tableauGrille[positionTireur].classList.contains("right_div")) {
             moovRight();
+            checkbombeandalien()
         }
     }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > min ) {
         if (!tableauGrille[positionTireur].classList.contains("top_div")) {
             moovUp();  
+            checkbombeandalien()
         }
         
     }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
         moovDown();
+        checkbombeandalien()
     }else if ((event.code === "Space")) {
         blaster[index].currentTime = 0;
         blaster[index].play();
