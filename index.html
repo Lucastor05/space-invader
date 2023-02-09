@@ -8,16 +8,21 @@
 </head>
 <body>
     <div class="background-music">
-        <p id="text">Modifié le volume : </p>
-        <audio autoplay id="myAudio">
-            <source src="ressources/Interstellar Main Theme - Extra Extended - Soundtrack by Hans Zimmer.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-        <input id="musicVolum" type="range" value="0.01" min="0" max="1" step="0.01">
+        <div>
+            <p id="text">Modifier le volume de la musique: </p>
+            <audio autoplay id="myAudio">
+                <source src="ressources/Interstellar Main Theme - Extra Extended - Soundtrack by Hans Zimmer.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <input id="musicVolum" type="range" value="0.01" min="0" max="1" step="0.01">
+            <p id="text">Modifier le volume des effets sonores: </p>
+            <input id="volumeEffets" type="range" value="0.01" min="0" max="1" step="0.01">
+        </div>
     </div>
-
-
-    <h3 id="scoreH3">Score :</h3>
+    <h1><img src="ressources/Space_Invaders_logo.GIF.webp"></h1>
+    <div class="container-h3">
+        <h3 id="scoreH3">Score : 0</h3>
+    </div>
 <div class="lifeBar">
     <div id="heart1">
         <?xml version="1.0" encoding="utf-8"?>
@@ -212,15 +217,7 @@
 </div>
     
 
-    <script>    
-    const music = document.getElementById("musicVolum");
-    const audio = document.getElementById("myAudio");
-    audio.volume = 0.025;
-    
-    music.addEventListener("click", function() {
-        audio.volume = music.value/2; 
-    });
-    </script>
+
     <script src="app.js"></script>
 </body>
 </html>
