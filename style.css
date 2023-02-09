@@ -40,6 +40,22 @@ h3 {
     background-position: center;
     background-size: contain;
 }
+
+.alienReinforced{
+    background: url(ressources/vaisseau.png);
+    transform: rotate(180deg);
+    background-position: center;
+    background-size: contain;
+}
+
+.wtfIsThat{
+    background: url(ressources/boom.png);
+    transform: rotate(180deg);
+    background-position: center;
+    background-size: contain;
+}
+
+
 .boom {
     background: url(ressources/boom.png);
 
