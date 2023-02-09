@@ -605,31 +605,21 @@ function raze(){
         tableauGrille[whereTireur()].classList.remove("tireur");
         tableauGrille[230].classList.add("tireur");
         positionTireur = 230;
-        var positionTireurShoot = whereTireur();
-        console.log(positionTireurShoot);
+        var positionTireurRaze= 230;
         var lazerRaze = whereTireur();
 
-        positionTireurShoot-=20;
+        positionTireurRaze-=20;
         lazerRaze-=20;
-        tableauGrille[positionTireurShoot].classList.add("canonRaze");
+        tableauGrille[positionTireurRaze].classList.add("canonRaze");
         for (var i = 1; i <= 10; i++) {
-            tableauGrille[positionTireurShoot-i].classList.add("canonRaze");
+            tableauGrille[positionTireurRaze-i].classList.add("canonRaze");
         }
         for (var i = 1; i <= 9; i++) {
-            tableauGrille[positionTireurShoot+i].classList.add("canonRaze");
+            tableauGrille[positionTireurRaze+i].classList.add("canonRaze");
         }
         var shoote = setInterval(function () {
 
             
-                        
-            tableauGrille[positionTireurShoot].classList.add("laser");
-            positionTireurShoot-=20;
-            tableauGrille[positionTireurShoot].classList.add("laser");
-
-            tableauGrille[positionTireurShoot+20].classList.remove("laser");
-                
-
-
             tableauGrille[lazerRaze].classList.add("laserRaze");
             for (var i = 1; i <= 10; i++) {
                 tableauGrille[lazerRaze-i].classList.add("laserRaze");
@@ -661,7 +651,9 @@ function raze(){
 
 
             
-            if (positionTireurShoot < 20 && positionTireurShoot >= 0) {
+            if (lazerRaze < 20 && lazerRaze >= 0) {
+            tableauGrille[lazerRaze].classList.remove("laserRaze");
+
                 for (var i = 1; i <= 10; i++) {
                     tableauGrille[lazerRaze-i].classList.remove("laserRaze");
                 }
@@ -670,27 +662,46 @@ function raze(){
                 }
                 clearInterval(shoote);
             }
+            for (var i = 1; i <= 10; i++) {
+                for (var j = 1; j <= 9; j++) {
 
-            if (alienHit3Bomba(positionTireurShoot)) {
-                tableauGrille[positionTireurShoot].classList.remove("bomba");
-                tableauGrille[positionTireurShoot+1].classList.remove("bomba");
-                tableauGrille[positionTireurShoot-1].classList.remove("bomba");
+                if (alienHitRaze(lazerRaze-i) || alienHitRaze(lazerRaze) || alienHitRaze(lazerRaze+j)) {
 
-                clearInterval(shoote);
-                removeHitAlien(alien, positionTireurShoot-1);
-                removeHitAlien(alien, positionTireurShoot+1);
-                removeHitAlien(alien, positionTireurShoot);
+                    tableauGrille[lazerRaze].classList.remove("laserRaze");
+                    for (var h = 1; h <= 10; h++) {
+                        tableauGrille[lazerRaze-h].classList.remove("laserRaze");
+                    }
+                    for (var g = 1; g <= 9; g++) {
+                        tableauGrille[lazerRaze+g].classList.remove("laserRaze");
+                    }
+                    
+                    clearInterval(shoote);
+                    removeHitAlien(alien, lazerRaze);
+                    removeHitAlien(alien, lazerRaze-i);
+                    removeHitAlien(alien, lazerRaze+j);
+                
 
-              
+                    if(!finito){
+                        score+=300;
+                        afficheScore();
+                    }
+                    
+                    tableauGrille[positionTireurRaze].classList.remove("canonRaze");
+                    for (var u = 1; u <= 10; u++) {
+                        tableauGrille[positionTireurRaze-u].classList.remove("canonRaze");
+                    }
+                    for (var l = 1; l <= 9; l++) {
+                        tableauGrille[positionTireurRaze+l].classList.remove("canonRaze");
+                    }
 
-                if(!finito){
-                    score+=300;
-                    afficheScore();
                 }
             }
+        }
             
         }, 100);
+
     }
+    
 useUltraze--;
     
 }
@@ -699,25 +710,12 @@ useUltraze--;
 
 function alienHitRaze(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
-        if (tableauGrille[positionTireurShoot].classList.contains("alien") && tableauGrille[positionTireurShoot+1].classList.contains("alien") && tableauGrille[positionTireurShoot-1].classList.contains("alien")){
-            boom3boomba(positionTireurShoot);
-            boom3boomba(positionTireurShoot+1);
-            boom3boomba(positionTireurShoot-1);
-        }else if (tableauGrille[positionTireurShoot].classList.contains("alien") && tableauGrille[positionTireurShoot+1].classList.contains("alien")) {
-            boom3boomba(positionTireurShoot);
-            boom3boomba(positionTireurShoot+1);
-        }else if (tableauGrille[positionTireurShoot].classList.contains("alien") && tableauGrille[positionTireurShoot-1].classList.contains("alien")) {
-            boom3boomba(positionTireurShoot);
-            boom3boomba(positionTireurShoot-1);
-        }
-  
-        tableauGrille[positionTireurShoot].classList.remove("bomba");
-        tableauGrille[positionTireurShoot-1].classList.remove("bomba");
-        tableauGrille[positionTireurShoot+1].classList.remove("bomba");
-        tableauGrille[positionTireurShoot].classList.remove("alien");
-        tableauGrille[positionTireurShoot-1].classList.remove("alien");
-        tableauGrille[positionTireurShoot+1].classList.remove("alien");
+        boomraze(positionTireurShoot);
 
+        tableauGrille[positionTireurShoot].classList.remove("boomraze");
+       
+        tableauGrille[positionTireurShoot].classList.remove("alien");
+       
      
         winMaybe();
         return true;
@@ -725,13 +723,13 @@ function alienHitRaze(positionTireurShoot) {
     }
 }
     
-function boom3boomba(positionTireurShoot) {
+function boomraze(positionTireurShoot) {
     var i=0;
     var bimbamboom =setInterval(function () {
 
-        tableauGrille[positionTireurShoot].classList.add("boom3bomba");
+        tableauGrille[positionTireurShoot].classList.add("boomraze");
         if (i == 2) {
-            tableauGrille[positionTireurShoot].classList.remove("boom3bomba");
+            tableauGrille[positionTireurShoot].classList.remove("boomraze");
             clearInterval(bimbamboom);
 
         }
