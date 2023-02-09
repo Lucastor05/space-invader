@@ -77,7 +77,16 @@ h3 {
     background: url(ressources/boom3bomba.png);
 
 }
+.boomrazer{
+    background: url(ressources/boomrazer.png);
 
+}
+.canonRaze{
+    background: url(ressources/canonRaze.png);
+}
+.laserRaze{
+    background: url(ressources/lazeRaze.png);
+}
 
 
 body {
