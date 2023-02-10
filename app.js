@@ -999,7 +999,7 @@ function moov(event) {
     }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
         moovDown();
     
-    }else if ((event.code === "KeyB")) {
+
     }else if ((event.code === "KeyB")) {
         
 
