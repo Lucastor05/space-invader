@@ -16,6 +16,7 @@ var blaster = [];
 var hadouken = [];
 
 var soundRaze = new Audio("ressources/soundRazeUlt.mp3");
+soundRaze.volume = 0.1;
 var index = 0;
 var indexHadouken = 0;
 
@@ -1097,7 +1098,7 @@ cursorEffetsSonores.addEventListener("click", function() {
 
 const music = document.getElementById("musicVolum");
 const audio = document.getElementById("myAudio");
-audio.volume = 0.025;
+audio.volume = 0.25;
 
 music.addEventListener("click", function() {
     audio.volume = music.value/1.5; 
