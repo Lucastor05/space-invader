@@ -65,14 +65,14 @@ h3 {
 }
 
 .alienReinforced{
-    background: url(ressources/reinforcedAlien\ 13.51.47.png);
+    background: url(ressources/reinforcedAlien.png);
     background-size: cover;
     background-position: center;
     background-size: contain;
 }
 
 .wtfIsThat{
-    background: url(ressources/tank\ 13.51.47.png);
+    background: url(ressources/tank.png);
     background-position: center;
     background-size: cover;
 }
