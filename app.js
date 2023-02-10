@@ -329,7 +329,7 @@ function shoot() {
             clearInterval(shoot);
         }*/
 
-    }, 10);
+    }, 40);
 }
 function setCapacite(){
     var bombabomm = sessionStorage.getItem("3bomba");
