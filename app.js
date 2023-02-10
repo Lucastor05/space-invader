@@ -1082,8 +1082,24 @@ const pUltRaze = document.getElementById("nbrUltRazeLeft");
 const p3bomba = document.getElementById("nbr3bombaLeft")
 
 function affichePowers(){
-    pUltRaze.innerText = "Ligne ultime restante : "+useUltraze;
-    p3bomba.innerText = "Triple tir restant : "+use3bomba;
+    var userName = sessionStorage.getItem("user");
+    var bombaStorage = sessionStorage.getItem("3bomba");
+    var razeStorage = sessionStorage.getItem("ultraze");
+
+
+
+    if(use3bomba <= 0 || bombaStorage !== userName){
+        p3bomba.innerText = "Triple tir restant : 0";
+    }else{
+        p3bomba.innerText = "Triple tir restant : "+use3bomba;
+    }
+
+    if(useUltraze <= 0  || razeStorage !== userName){
+        pUltRaze.innerText = "Ligne ultime restante : 0";
+    }else{
+        pUltRaze.innerText = "Ligne ultime restante : "+useUltraze;
+    }
+
 }
 
 var interval2 = setInterval(affichePowers, 10);
