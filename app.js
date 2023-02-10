@@ -12,14 +12,22 @@ var max = 220;
 var finito = false;
 var score=0;
 var blaster = [];
+var hadouken = [];
+
 var soundRaze = new Audio("ressources/soundRazeUlt.mp3");
 var index = 0;
+var indexHadouken = 0;
+
 var nombreVie = 0;
 var use3bomba = 3;
 var useUltraze = 1;
 for (let i = 0; i < 10; i++) {
     blaster[i] = new Audio("ressources/blaster.mp3");
     blaster[i].volume = 0.01;
+}
+for (let i = 0; i < 3; i++) {
+    hadouken[i] = new Audio("ressources/hadouken.mp3");
+    hadouken[i].volume = 0.3;
 }
 
 /*FONCTIONS*/
@@ -193,7 +201,7 @@ function boom(positionTireurShoot) {
     var bimbamboom =setInterval(function () {
 
         tableauGrille[positionTireurShoot].classList.add("boom");
-        if (i == 2) {
+        if (i == 3) {
             tableauGrille[positionTireurShoot].classList.remove("boom");
             clearInterval(bimbamboom);
 
@@ -425,9 +433,9 @@ function setCapacite(){
 
             
         }, 100);
+        }
     }
-}
-use3bomba--;
+    use3bomba--;
 }
 
 function afficheVie(){
@@ -889,6 +897,26 @@ function bestScores(){
     localStorage.setItem("bestScores", JSON.stringify(bestScores));
 }
 
+function checkCollision(){
+
+    
+    if(tableauGrille[whereTireur()].classList.contains("alien") || tableauGrille[whereTireur()].classList.contains("alienReinforced") || tableauGrille[whereTireur()].classList.contains("wtfIsThat") || tableauGrille[whereTireur()].classList.contains("laserAlien")){
+        if(nombreVie == 1){
+            showModalLoose(score);
+            finito = true;
+            clearInterval(interval1);
+        }else{
+            nombreVie--;
+            score-=10;
+            afficheVie()
+            boom(whereTireur());
+            tableauGrille[whereTireur()].classList.remove("tireur");
+            tableauGrille[230].classList.add("tireur");
+            positionTireur = whereTireur();
+        }
+    }
+}
+
 /*DEBUT JEU*/
 
 
@@ -948,11 +976,11 @@ if(difficulty == 1){
 }
 
 
-
-
 afficheVie();
 setAlien(alien, tableauGrille);
 var interval1 = setInterval(moveAlien, vitesseAlien);
+var interval3 = setInterval(checkCollision, 10)
+
 document.addEventListener("keydown",
 function moov(event) {
     if (event.code === "ArrowLeft" || event.code === "KeyA") {
@@ -970,17 +998,19 @@ function moov(event) {
         
     }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
         moovDown();
-    }else if ((event.code === "Space")) {
-        blaster[index].currentTime = 0;
-        blaster[index].play();
-        shoot();
-        index = (index + 1) % 5;
-        if(!finito){
-            score-=10;
-            afficheScore();
-        }
+    
     }else if ((event.code === "KeyB")) {
-        setCapacite();
+    }else if ((event.code === "KeyB")) {
+        
+
+        if(!tableauGrille[whereTireur()].classList.contains("right_div") && !tableauGrille[whereTireur()].classList.contains("left_div")){
+            hadouken[indexHadouken].currentTime = 0;
+            hadouken[indexHadouken].play();
+            setCapacite();
+            indexHadouken = (indexHadouken + 1) % 5;
+
+        }
+
         if(!finito){
         
             afficheScore();
@@ -996,13 +1026,28 @@ function moov(event) {
     checkbombeandalien();
 });
 
+document.addEventListener("keyup",
+function moov(event) {
+    if ((event.code === "Space")) {
+        blaster[index].currentTime = 0;
+        blaster[index].play();
+        shoot();
+        index = (index + 1) % 5;
+        if(!finito){
+            score-=10;
+            afficheScore();
+        }
+    }
+    checkbombeandalien();
+});
+
 
 cursorEffetsSonores.addEventListener("click", function() {
     for (let i = 0; i < 10; i++) {
         blaster[i].volume = cursorEffetsSonores.value/1.2; 
     }
-    soundRaze.volume = cursorEffetsSonores.value/1.2;
     
+    soundRaze.volume = cursorEffetsSonores.value/1.2;
 });
 
 const music = document.getElementById("musicVolum");
@@ -1012,6 +1057,7 @@ audio.volume = 0.025;
 music.addEventListener("click", function() {
     audio.volume = music.value/1.2; 
 });
+
 
 
 
