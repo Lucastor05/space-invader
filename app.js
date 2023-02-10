@@ -26,7 +26,7 @@ for (let i = 0; i < 10; i++) {
 }
 for (let i = 0; i < 3; i++) {
     hadouken[i] = new Audio("ressources/hadouken.mp3");
-    hadouken[i].volume = 0.3;
+    hadouken[i].volume = 0.1;
 }
 
 /*FONCTIONS*/
@@ -1006,7 +1006,6 @@ function moov(event) {
             hadouken[indexHadouken].play();
             setCapacite();
             indexHadouken = (indexHadouken + 1) % 5;
-
         }
 
         if(!finito){
@@ -1043,6 +1042,9 @@ cursorEffetsSonores.addEventListener("click", function() {
     for (let i = 0; i < 10; i++) {
         blaster[i].volume = cursorEffetsSonores.value/1.2; 
     }    
+    for (let i = 0; i < 3; i++) {
+        hadouken[i].volume = cursorEffetsSonores.value/1.2; 
+    } 
 });
 
 const music = document.getElementById("musicVolum");
@@ -1050,7 +1052,7 @@ const audio = document.getElementById("myAudio");
 audio.volume = 0.025;
 
 music.addEventListener("click", function() {
-    audio.volume = music.value/1.2; 
+    audio.volume = music.value/1.5; 
 });
 
 
