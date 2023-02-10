@@ -32,7 +32,9 @@ for (let i = 0; i < 3; i++) {
 
 /*FONCTIONS*/
 
+//fonction qui enleve la classe "alien" de la grille
 function removeHitAlien(value) {
+    
     for (var i = 0; i < alien.length; i++) {
         if (alien[i] === value) {
           alien.splice(i, 1);
@@ -40,6 +42,8 @@ function removeHitAlien(value) {
         }
       }
 }
+
+//fonction qui enleve la classe "alienReinforced" de la grille
 function removeHitReinforcedAlien(value) {
     for (var i = 0; i < alienRenforce.length; i++) {
         if (alienRenforce[i] === value) {
@@ -48,6 +52,8 @@ function removeHitReinforcedAlien(value) {
         }
       }
 }
+
+//fonction qui enleve la classe "wtfIsThat" de la grille
 function removeHitTank(value) {
     for (var i = 0; i < wtfIsThat.length; i++) {
         if (wtfIsThat[i] === value) {
@@ -57,6 +63,8 @@ function removeHitTank(value) {
       }
 }
 
+
+//fonction qui enleve les aliens de la grille
 function removeAlien(){
     wtfIsThat.forEach(element => {
         if(tableauGrille[element]){
@@ -82,6 +90,8 @@ function removeAlien(){
     });
 }
 
+
+//fonction qui ajoute les aliens dans la grille
 function setAlien(){
     wtfIsThat.forEach(element => {
         if(tableauGrille[element]){
@@ -107,6 +117,7 @@ function setAlien(){
     });
 }
 
+//fonctions qui fait apparaitre les aliens, gere les deplacements des aliens, les faits tirer et les fait disparaitre
 function moveAlien(){
     removeAlien();
 
@@ -176,17 +187,14 @@ function moveAlien(){
     loose();
 }
 
+
+//fonction qui renvoie un nombre aleatoire entre 0 et 100
 function shouldFireLaser() {
     
     let nb = Math.floor(Math.random() * 101);
     return nb < proba;
 }
 
-function shouldFireLaser() {
-    
-    let nb = Math.floor(Math.random() * 101);
-    return nb < proba;
-}
 
 function whereTireur() {
     for (let i = 160; i < 240; i++) {
@@ -445,6 +453,8 @@ function setCapacite(){
     
 }
 
+
+//fonction qui affiche les vies de l'utilisateur
 function afficheVie(){
     var coeur1 = document.getElementById("first_heart");
     var coeur2 = document.getElementById("second_heart");
@@ -464,11 +474,14 @@ function afficheVie(){
     
 }
 
+//fonction qui affiche le score de l'utilisateur
 function afficheScore(){
     var baliseScore = document.getElementById("scoreH3");
     baliseScore.innerText= "Score :"+score;
 }
 
+
+//fonction qui fait tirer les aliens
 function AlienAreShootingBackWTF(element) {
     var positionTireurShoot = element;
     var positionShip = positionTireur;
@@ -509,6 +522,8 @@ function AlienAreShootingBackWTF(element) {
     }, vitessShootAlien);
 }
 
+
+//fonction qui renvoie true si un alien normal est touché
 function alienHit(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
         tableauGrille[positionTireurShoot].classList.remove("alien");
@@ -519,6 +534,7 @@ function alienHit(positionTireurShoot) {
     }
 }
 
+//fonction qui renvoie true si un alien renforcé est touché
 function alienReinforcedHit(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced")) {
         tableauGrille[positionTireurShoot].classList.remove("alienReinforced");
@@ -531,6 +547,7 @@ function alienReinforcedHit(positionTireurShoot) {
     }
 }
 
+//fonction qui renvoie true si un tank alien est touché
 function wtfIsThatHit(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat")) {
         tableauGrille[positionTireurShoot].classList.remove("wtfIsThat");
@@ -579,6 +596,7 @@ function alienHit3Bomba(positionTireurShoot) {
     }
 }
 
+//fonction qui renvoie true si un alien renforcé est touché par la triple bombe
 function alienRenforceHit3Bomba(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced")) {
         if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced") && tableauGrille[positionTireurShoot+1].classList.contains("alienReinforced") && tableauGrille[positionTireurShoot-1].classList.contains("alienReinforced")){
@@ -607,6 +625,7 @@ function alienRenforceHit3Bomba(positionTireurShoot) {
     }
 }
 
+//fonction qui renvoie true si un tank alien est touché par la triple bombe
 function alienTankHit3Bomba(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat")) {
         if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat") && tableauGrille[positionTireurShoot+1].classList.contains("wtfIsThat") && tableauGrille[positionTireurShoot-1].classList.contains("wtfIsThat")){
@@ -849,6 +868,7 @@ function alienHitRaze(positionTireurShoot) {
     }
 }
 
+//fonction qui renvoie true si un alien renforce est touché par la ligne ultime
 function alienReinforcedHitRaze(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced")) {
         boomraze(positionTireurShoot);
@@ -864,6 +884,7 @@ function alienReinforcedHitRaze(positionTireurShoot) {
     }
 }
 
+//fonction qui renvoie true si un tank alien est touché par la ligne ultime
 function alienTankHitRaze(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("wtfIsThat")) {
         boomraze(positionTireurShoot);
@@ -904,6 +925,7 @@ function bestScores(){
     localStorage.setItem("bestScores", JSON.stringify(bestScores));
 }
 
+//fonction qui check si le tireur est touché par un alien et/ou un laser alien
 function checkCollision(){
 
     
@@ -958,7 +980,7 @@ var wasOnSide = true;
 var positionTireur = whereTireur();
 
 
-
+//set les variables en fonction de la difficulté
 if(difficulty == 1){
     proba = 0.5;
     vitesseAlien = 700;
@@ -1091,6 +1113,7 @@ function showModal(score) {
   scoree.innerHTML =score;
 }
 
+//fonction qui affiche la pop-up de loose
 function showModalLoose(score) {
     modalLoose.style.display = "block";
     scoreLoose.innerHTML =score;
@@ -1115,12 +1138,14 @@ document.location.href="menu.html";
   // code to quit the game
 };
 
+//reload la page pour rejouer
 replayButtonLoose.onclick = function() {
     hideModal();
     window.location.reload()
     // code to restart the game
 };
   
+//retourne au menu
 quitButtonLoose.onclick = function() {
     hideModal();
   document.location.href="menu.html";
@@ -1132,6 +1157,7 @@ quitButtonLoose.onclick = function() {
 const pUltRaze = document.getElementById("nbrUltRazeLeft");
 const p3bomba = document.getElementById("nbr3bombaLeft")
 
+//fonction qui affiche les capacités restantes
 function affichePowers(){
     var userName = sessionStorage.getItem("user");
     var bombaStorage = sessionStorage.getItem("3bomba");
