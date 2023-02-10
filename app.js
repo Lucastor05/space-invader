@@ -335,15 +335,18 @@ function setCapacite(){
     var bombabomm = sessionStorage.getItem("3bomba");
     if(bombabomm == sessionStorage.getItem("user") && use3bomba>0){
         
+        
         var positionTireurShoot = whereTireur();
         if (tableauGrille[positionTireurShoot].classList.contains("right_div")) {
             
         }else if (tableauGrille[positionTireurShoot].classList.contains("left_div")) {
             
         }else{
-
+            hadouken[indexHadouken].currentTime = 0;
+            hadouken[indexHadouken].play();
+            indexHadouken = (indexHadouken + 1) % 5;
         
-        var shoote = setInterval(function () {
+            var shoote = setInterval(function () {
             tableauGrille[positionTireurShoot].classList.add("bomba");
             tableauGrille[positionTireurShoot-1].classList.add("bomba");
             tableauGrille[positionTireurShoot+1].classList.add("bomba");
@@ -435,7 +438,11 @@ function setCapacite(){
         }, 100);
         }
     }
-    use3bomba--;
+    if(!tableauGrille[whereTireur()].classList.contains("right_div") && !tableauGrille[whereTireur()].classList.contains("left_div")){
+        use3bomba--;
+    }
+
+    
 }
 
 function afficheVie(){
@@ -1001,15 +1008,8 @@ function moov(event) {
     
 
     }else if ((event.code === "KeyB")) {
+        setCapacite();
         
-
-        if(!tableauGrille[whereTireur()].classList.contains("right_div") && !tableauGrille[whereTireur()].classList.contains("left_div")){
-            hadouken[indexHadouken].currentTime = 0;
-            hadouken[indexHadouken].play();
-            setCapacite();
-            indexHadouken = (indexHadouken + 1) % 5;
-        }
-
         if(!finito){
         
             afficheScore();
