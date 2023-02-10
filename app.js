@@ -287,7 +287,7 @@ function shoot() {
             clearInterval(shoot);
             removeHitAlien(positionTireurShoot);
             if(!finito){
-                score+=10;
+                score+=100;
                 afficheScore();
             }
         }
@@ -297,7 +297,7 @@ function shoot() {
             clearInterval(shoot);
             removeHitReinforcedAlien(positionTireurShoot)
             if(!finito){
-                score+=10;
+                score+=100;
                 afficheScore();
             }
         }
@@ -307,7 +307,7 @@ function shoot() {
             clearInterval(shoot);
             removeHitTank(positionTireurShoot)
             if(!finito){
-                score+=10;
+                score+=100;
                 afficheScore();
             }
         }
@@ -368,7 +368,7 @@ function setCapacite(){
               
 
                 if(!finito){
-                    score+=300;
+                    score+=290;
                     afficheScore();
                 }
 
@@ -389,7 +389,7 @@ function setCapacite(){
               
 
                 if(!finito){
-                    score+=300;
+                    score+=290;
                     afficheScore();
                 }
 
@@ -413,7 +413,7 @@ function setCapacite(){
               
 
                 if(!finito){
-                    score+=300;
+                    score+=290;
                     afficheScore();
                 }
 
@@ -535,141 +535,6 @@ function ShipnHit(positionTireurShoot) {
     }
 }
 
-/*DEBUT JEU*/
-
-
-for (let pas = 1; pas <241; pas++) {
-
-    let newDiv = document.createElement("div");
-
-    if(pas % 20 === 0){
-        newDiv.setAttribute("class","right_div");
-    }
-
-    if((pas-1) % 20 === 0){
-        newDiv.setAttribute("class","left_div");
-    }
-
-    if(pas >= 0 && pas <21){
-        newDiv.classList.add("top_div");
-    }
-
-
-
-    grille.appendChild(newDiv);
-}
-
-tableauGrille[230].classList.add("tireur");
-var alien = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
-var alienRenforce = [];
-var wtfIsThat = [];
-
-
-var direction = 1;
-var wasOnSide = true;
-var positionTireur = whereTireur();
-
-
-
-if(difficulty == 1){
-    proba = 0.5;
-    vitesseAlien = 700;
-    nombreVie = 1;
-    alienRenforce = [];
-}else if(difficulty == 2){
-    proba = 2;
-    vitesseAlien = 500;
-    nombreVie = 2;
-    reinforcedProba= 0.1;
-    alienRenforce = [0,1,2,3,4,5,6,7,8,9,10,11];
-}else if(difficulty == 3){
-    proba = 5;
-    vitesseAlien = 300;
-    nombreVie = 3;
-    reinforcedProba= 0.1;
-    alienRenforce = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31];
-    wtfIsThat = [0,1,2,3,4,5,6,7,8,9,10,11];
-
-}else{
-    document.location.href="menu.html"; 
-}
-
-
-
-
-afficheVie();
-setAlien(alien, tableauGrille);
-var interval1 = setInterval(moveAlien, vitesseAlien);
-document.addEventListener("keydown",
-function moov(event) {
-    if (event.code === "ArrowLeft" || event.code === "KeyA") {
-        if (!tableauGrille[positionTireur].classList.contains("left_div")) {
-            moovLeft();
-        }
-    } else if (event.code === "ArrowRight" || event.code === "KeyD") {
-        if (!tableauGrille[positionTireur].classList.contains("right_div")) {
-            moovRight();
-        }
-    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > min ) {
-        if (!tableauGrille[positionTireur].classList.contains("top_div")) {
-            moovUp();  
-        }
-        
-    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
-        moovDown();
-    }else if ((event.code === "Space")) {
-        blaster[index].currentTime = 0;
-        blaster[index].play();
-        shoot();
-        index = (index + 1) % 5;
-        if(!finito){
-            score-=1;
-            afficheScore();
-        }
-    }else if ((event.code === "KeyB")) {
-        setCapacite();
-        if(!finito){
-            score-=10;
-            afficheScore();
-        }
-    }else if ((event.code === "KeyV")) {
-        raze();
-        if(!finito){
-            score-=10;
-            afficheScore();
-        }
-    }
-    checkbombeandalien();
-});
-
-
-cursorEffetsSonores.addEventListener("click", function() {
-    for (let i = 0; i < 10; i++) {
-        blaster[i].volume = cursorEffetsSonores.value/1.2; 
-    }
-    
-});
-
-const music = document.getElementById("musicVolum");
-const audio = document.getElementById("myAudio");
-audio.volume = 0.025;
-
-music.addEventListener("click", function() {
-    audio.volume = music.value/1.2; 
-});
-
-function bestScores(){
-    var username = sessionStorage.getItem("user");
-    var score = parseInt(localStorage.getItem("score"));
-    var bestScores = JSON.parse(localStorage.getItem("bestScores")) || {};
-    if (!bestScores[username] || score > bestScores[username]) {
-    bestScores[username] = score;
-    }
-    localStorage.setItem("bestScores", JSON.stringify(bestScores));
-}
-
-
-
 function alienHit3Bomba(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
         if (tableauGrille[positionTireurShoot].classList.contains("alien") && tableauGrille[positionTireurShoot+1].classList.contains("alien") && tableauGrille[positionTireurShoot-1].classList.contains("alien")){
@@ -769,75 +634,6 @@ function boom3boomba(positionTireurShoot) {
 
 }
 
-
-
-
-
-var modal = document.getElementById("myModalWin");
-var modalLoose = document.getElementById("myModalLoose");
-
-var scoree = document.getElementById("final-score");
-scoree.innerHTML =0 ;
-
-var scoreLoose = document.getElementById("final-scoreLoose");
-
-var replayButton = document.getElementById("replay-button");
-var quitButton = document.getElementById("quit-button");
-var replayButtonLoose = document.getElementById("replay-buttonLoose");
-var quitButtonLoose = document.getElementById("quit-buttonLoose");
-
-function showModal(score) {
-  modal.style.display = "block";
-  scoree.innerHTML =score;
-}
-
-function showModalLoose(score) {
-    modalLoose.style.display = "block";
-    scoreLoose.innerHTML =score;
-    console.log(scoreLoose.innerHTML);
-
-  }
-
-function hideModal() {
-  modal.style.display = "none";
-  modalLoose.style.display = "none";
-}
-
-replayButton.onclick = function() {
-  hideModal();
-  window.location.reload()
-  // code to restart the game
-};
-
-quitButton.onclick = function() {
-  hideModal();
-document.location.href="menu.html";
-  // code to quit the game
-};
-
-replayButtonLoose.onclick = function() {
-    hideModal();
-    window.location.reload()
-    // code to restart the game
-  };
-  
-  quitButtonLoose.onclick = function() {
-    hideModal();
-  document.location.href="menu.html";
-    // code to quit the game
-  };
-
-
-
-
-
-
-
-
-
-
-
-
 function raze(){
     var ultraze = sessionStorage.getItem("ultraze");
     if(ultraze == sessionStorage.getItem("user") && useUltraze>0){
@@ -923,7 +719,7 @@ function raze(){
                 
 
                     if(!finito){
-                        score+=300;
+                        score+=290;
                         afficheScore();
                     }
                     
@@ -957,7 +753,7 @@ function raze(){
                 
 
                     if(!finito){
-                        score+=300;
+                        score+=290;
                         afficheScore();
                     }
                     
@@ -998,7 +794,7 @@ function raze(){
                 
 
                     if(!finito){
-                        score+=300;
+                        score+=290;
                         afficheScore();
                     }
                     
@@ -1081,6 +877,224 @@ function boomraze(positionTireurShoot) {
     }, 100);
 
 }
+
+function bestScores(){
+    var username = sessionStorage.getItem("user");
+    var score = parseInt(localStorage.getItem("score"));
+    var bestScores = JSON.parse(localStorage.getItem("bestScores")) || {};
+    if (!bestScores[username] || score > bestScores[username]) {
+    bestScores[username] = score;
+    }
+    localStorage.setItem("bestScores", JSON.stringify(bestScores));
+}
+
+/*DEBUT JEU*/
+
+
+for (let pas = 1; pas <241; pas++) {
+
+    let newDiv = document.createElement("div");
+
+    if(pas % 20 === 0){
+        newDiv.setAttribute("class","right_div");
+    }
+
+    if((pas-1) % 20 === 0){
+        newDiv.setAttribute("class","left_div");
+    }
+
+    if(pas >= 0 && pas <21){
+        newDiv.classList.add("top_div");
+    }
+
+
+
+    grille.appendChild(newDiv);
+}
+
+tableauGrille[230].classList.add("tireur");
+
+var alien = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31,40,41,42,43,44,45,46,47,48,49,50,51];
+var alienRenforce = [];
+var wtfIsThat = [];
+var direction = 1;
+var wasOnSide = true;
+var positionTireur = whereTireur();
+
+
+
+if(difficulty == 1){
+    proba = 0.5;
+    vitesseAlien = 700;
+    nombreVie = 1;
+    alienRenforce = [];
+}else if(difficulty == 2){
+    proba = 2;
+    vitesseAlien = 500;
+    nombreVie = 2;
+    reinforcedProba= 0.1;
+    alienRenforce = [0,1,2,3,4,5,6,7,8,9,10,11];
+}else if(difficulty == 3){
+    proba = 5;
+    vitesseAlien = 300;
+    nombreVie = 3;
+    reinforcedProba= 0.1;
+    alienRenforce = [0,1,2,3,4,5,6,7,8,9,10,11,20,21,22,23,24,25,26,27,28,29,30,31];
+    wtfIsThat = [0,1,2,3,4,5,6,7,8,9,10,11];
+
+}else{
+    document.location.href="menu.html"; 
+}
+
+
+
+
+afficheVie();
+setAlien(alien, tableauGrille);
+var interval1 = setInterval(moveAlien, vitesseAlien);
+document.addEventListener("keydown",
+function moov(event) {
+    if (event.code === "ArrowLeft" || event.code === "KeyA") {
+        if (!tableauGrille[positionTireur].classList.contains("left_div")) {
+            moovLeft();
+        }
+    } else if (event.code === "ArrowRight" || event.code === "KeyD") {
+        if (!tableauGrille[positionTireur].classList.contains("right_div")) {
+            moovRight();
+        }
+    }else if ((event.code === "ArrowUp" || event.code === "KeyW") && positionTireur > min ) {
+        if (!tableauGrille[positionTireur].classList.contains("top_div")) {
+            moovUp();  
+        }
+        
+    }else if ((event.code === "ArrowDown" || event.code === "KeyS") && positionTireur < max) {
+        moovDown();
+    }else if ((event.code === "Space")) {
+        blaster[index].currentTime = 0;
+        blaster[index].play();
+        shoot();
+        index = (index + 1) % 5;
+        if(!finito){
+            score-=10;
+            afficheScore();
+        }
+    }else if ((event.code === "KeyB")) {
+        setCapacite();
+        if(!finito){
+        
+            afficheScore();
+        }
+    }else if ((event.code === "KeyV")) {
+        raze();
+        if(!finito){
+            
+            afficheScore();
+        }
+    }
+    checkbombeandalien();
+});
+
+
+cursorEffetsSonores.addEventListener("click", function() {
+    for (let i = 0; i < 10; i++) {
+        blaster[i].volume = cursorEffetsSonores.value/1.2; 
+    }
+    
+});
+
+const music = document.getElementById("musicVolum");
+const audio = document.getElementById("myAudio");
+audio.volume = 0.025;
+
+music.addEventListener("click", function() {
+    audio.volume = music.value/1.2; 
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+var modal = document.getElementById("myModalWin");
+var modalLoose = document.getElementById("myModalLoose");
+
+var scoree = document.getElementById("final-score");
+scoree.innerHTML =0 ;
+
+var scoreLoose = document.getElementById("final-scoreLoose");
+
+var replayButton = document.getElementById("replay-button");
+var quitButton = document.getElementById("quit-button");
+var replayButtonLoose = document.getElementById("replay-buttonLoose");
+var quitButtonLoose = document.getElementById("quit-buttonLoose");
+
+function showModal(score) {
+  modal.style.display = "block";
+  scoree.innerHTML =score;
+}
+
+function showModalLoose(score) {
+    modalLoose.style.display = "block";
+    scoreLoose.innerHTML =score;
+    console.log(scoreLoose.innerHTML);
+
+  }
+
+function hideModal() {
+  modal.style.display = "none";
+  modalLoose.style.display = "none";
+}
+
+replayButton.onclick = function() {
+  hideModal();
+  window.location.reload()
+  // code to restart the game
+};
+
+quitButton.onclick = function() {
+  hideModal();
+document.location.href="menu.html";
+  // code to quit the game
+};
+
+replayButtonLoose.onclick = function() {
+    hideModal();
+    window.location.reload()
+    // code to restart the game
+};
+  
+quitButtonLoose.onclick = function() {
+    hideModal();
+  document.location.href="menu.html";
+    // code to quit the game
+};
+
+
+
+const pUltRaze = document.getElementById("nbrUltRazeLeft");
+const p3bomba = document.getElementById("nbr3bombaLeft")
+
+function affichePowers(){
+    pUltRaze.innerText = "Ligne ultime restante : "+useUltraze;
+    p3bomba.innerText = "Triple tir restant : "+use3bomba;
+}
+
+var interval2 = setInterval(affichePowers, 10);
+
+
+
+
+
+
+
+
 
 
 /*setInterval(function () {
