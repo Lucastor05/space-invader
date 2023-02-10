@@ -427,3 +427,22 @@ svg{
   align-items: center;
   text-align: center;
 }
+
+.powers-left{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  color: #ffff00;
+  margin-top: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.powers-left div{
+  border: #ffff00 solid;
+  border-radius: 10px;
+  width: 240px;
+  text-align: center;
+  align-items: center;
+}
