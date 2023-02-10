@@ -12,6 +12,7 @@ var max = 220;
 var finito = false;
 var score=0;
 var blaster = [];
+var soundRaze = new Audio("ressources/soundRazeUlt.mp3");
 var index = 0;
 var nombreVie = 0;
 var use3bomba = 3;
@@ -637,7 +638,7 @@ function boom3boomba(positionTireurShoot) {
 function raze(){
     var ultraze = sessionStorage.getItem("ultraze");
     if(ultraze == sessionStorage.getItem("user") && useUltraze>0){
-        
+        soundRaze.play();
         
         tableauGrille[whereTireur()].classList.remove("tireur");
         tableauGrille[230].classList.add("tireur");
@@ -986,6 +987,7 @@ function moov(event) {
         }
     }else if ((event.code === "KeyV")) {
         raze();
+        
         if(!finito){
             
             afficheScore();
@@ -999,6 +1001,7 @@ cursorEffetsSonores.addEventListener("click", function() {
     for (let i = 0; i < 10; i++) {
         blaster[i].volume = cursorEffetsSonores.value/1.2; 
     }
+    soundRaze.volume = cursorEffetsSonores.value/1.2;
     
 });
 
