@@ -1,3 +1,4 @@
+//vatiables
 const submitBtn = document.querySelector("#bouton3bomba");
 const btn1 = document.getElementById("acheterTripleTir");
 const btn2 = document.getElementById("acheterLigneUlt");
@@ -5,6 +6,7 @@ const userName = sessionStorage.getItem("user");
 const bombaStorage = sessionStorage.getItem("3bomba");
 const razeStorage = sessionStorage.getItem("ultraze");
 
+//fonction pour verifier si l'utilisateur a assez de points pour acheter une 3bombe
 submitBtn.addEventListener("click", function(event) {
     event.preventDefault();
   
@@ -25,8 +27,9 @@ submitBtn.addEventListener("click", function(event) {
   });
 
 
-const ultraze = document.querySelector("#ultraze");
 
+//fonction pour verifier si l'utilisateur a assez de points pour acheter une bombe raze
+const ultraze = document.querySelector("#ultraze");
 ultraze.addEventListener("click", function(event) {
 event.preventDefault();
 
@@ -47,7 +50,7 @@ if (parseInt(score) > 3000) {
 }
 });
     
-  
+//fonction pour afficher les points de l'utilisateur
 const scoreMarket = document.getElementById("scoreMarketP");
 
 var bestscore = JSON.parse(localStorage.getItem("bestScores")) || {};
