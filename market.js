@@ -13,6 +13,7 @@ submitBtn.addEventListener("click", function(event) {
     }
     if (parseInt(score) > 2500) {
         sessionStorage.setItem("3bomba", user);
+
     }else{
         alert("Vous n'avez pas assez de points pour acheter cette bombe");
     }
@@ -34,6 +35,7 @@ ultraze.addEventListener("click", function(event) {
     }
     if (parseInt(score) > 3000) {
         sessionStorage.setItem("ultraze", user);
+        
     }else{
         alert("Vous n'avez pas assez de points pour acheter cette bombe");
     }
