@@ -3,8 +3,17 @@ body {
   background: url(ressources/wp3493594.webp);
   background-size: cover;
   background-color: black;
+  animation: background-defile 5s linear infinite;
 }
 
+@keyframes background-defile {
+    from {
+        background-position-y: 0px;
+    }
+    to {
+        background-position-y: 3000px;
+    }
+}
 
 .menu-container {
     display: flex;

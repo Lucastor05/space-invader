@@ -1,4 +1,9 @@
 const submitBtn = document.querySelector("#bouton3bomba");
+const btn1 = document.getElementById("acheterTripleTir");
+const btn2 = document.getElementById("acheterLigneUlt");
+const userName = sessionStorage.getItem("user");
+const bombaStorage = sessionStorage.getItem("3bomba");
+const razeStorage = sessionStorage.getItem("ultraze");
 
 submitBtn.addEventListener("click", function(event) {
     event.preventDefault();
@@ -13,6 +18,7 @@ submitBtn.addEventListener("click", function(event) {
     }
     if (parseInt(score) > 2500) {
         sessionStorage.setItem("3bomba", user);
+        btn1.style.display = "block";
     }else{
         alert("Vous n'avez pas assez de points pour acheter cette bombe");
     }
@@ -34,6 +40,8 @@ for (username in bestscore) {
 }
 if (parseInt(score) > 3000) {
     sessionStorage.setItem("ultraze", user);
+    btn2.style.display = "block";
+    
 }else{
     alert("Vous n'avez pas assez de points pour acheter cette bombe");
 }
@@ -52,5 +60,14 @@ for (username in bestscore) {
 }
 scoreMarket.innerText = "Vos points : "+score;
 
-  
+
+
+
+if(razeStorage === userName){
+    btn2.style.display = "flex";
+}
+
+if(bombaStorage === userName){
+    btn1.style.display = "flex";
+}
 
