@@ -1,0 +1,444 @@
+
+.grille {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid #ffff00;
+    border-radius: 10px;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+h1{
+  align-items: start;
+  position: absolute;
+  left: 2%;
+  top: 2%;
+
+}
+
+h1 img{
+  height: 100px;
+  width: auto;
+}
+
+
+@keyframes background-defile {
+    from {
+        background-position-y: 0px;
+    }
+    to {
+        background-position-y: 3000px;
+    }
+}
+.container-h3{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+
+h3 {
+    margin: 20px 0;
+    border: #ffff00 solid;
+    border-radius: 10px;
+    width: 500px;
+    margin-top: 100px;
+
+
+}
+.grille div {
+    width: 25px;
+    height: 25px;
+}
+.tireur {
+    background: url(ressources/vaisseau.png);
+    transform: rotate(180deg);
+    background-position: center;
+    background-size: contain;
+}
+.alien {
+    background: url(ressources/ennemies.png);
+    background-position: center;
+    background-size: contain;
+}
+
+.alienReinforced{
+    background: url(ressources/reinforcedAlien.png);
+    background-size: cover;
+    background-position: center;
+    background-size: contain;
+}
+
+.wtfIsThat{
+    background: url(ressources/tank.png);
+    background-position: center;
+    background-size: cover;
+}
+
+
+.boom {
+    background: url(ressources/boom.png);
+
+}
+.laser {
+    background: url(ressources/bomba.png);
+    
+}
+
+.laserAlien {
+    background: url(ressources/bombaAlien.png);
+
+    
+}
+.bomba{
+    background: url(ressources/1bomba.png);
+
+}
+.boom3bomba{
+    background: url(ressources/boom3bomba.png);
+
+}
+.boomraze{
+    background: url(ressources/boomraze.png);
+
+}
+.canonRaze{
+    background: url(ressources/canonRaze.png);
+}
+.laserRaze{
+    background: url(ressources/lazeRaze.png);
+}
+
+
+body {
+
+    color: #fff;
+    background: url(ressources/wp3493594.webp);
+    animation: background-defile 10s linear infinite;
+    background-color: black;
+    animation: background-defile 5s linear infinite;
+
+
+}
+
+  
+#text {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+.background-music{
+  position: absolute;
+  width: 300px;
+  height: 500px;
+  top: 20%;
+  left: 5%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#myAudio {
+    width: 10%;
+    
+}
+.background-music div{
+  color: #ffff00;
+  padding: 20px;
+  border: #ffff00 solid;
+  border-radius: 10px;
+
+}
+  
+#musicVolum {
+    width: 90%;
+    height: 25px;
+    background-color: transparent;
+    appearance: none;
+    outline: none;
+    border-radius: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: solid #ffff00;
+}
+  
+#musicVolum::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    background-color: #ffff00;
+    border-radius: 50%;
+    cursor: pointer;
+    appearance: none;
+}
+
+#volumeEffets {
+  width: 90%;
+  height: 25px;
+  background-color: transparent;
+  appearance: none;
+  outline: none;
+  border-radius: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: solid #ffff00;
+}
+
+#volumeEffets::-webkit-slider-thumb {
+  width: 15px;
+  height: 15px;
+  background-color: #ffff00;
+  border-radius: 50%;
+  cursor: pointer;
+  appearance: none;
+}
+
+.lifeBar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    margin: 0 auto;
+}
+
+svg{
+    height: 30px;
+    width: 30px;
+    fill: #333;
+}
+
+#first_heart, 
+#second_heart,
+#third_heart{
+    fill: red;
+}
+
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  border: #ffff00 solid;
+  border-radius: 10px;
+  width: 500px;
+  height: 620px;
+}
+
+.modal-contentLoose {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid #888;
+  width: 700px;
+  height: 700px;
+  border: #ffff00 solid;
+  border-radius: 10px;
+
+}
+
+  .text-container{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: larger;
+    align-items: center;
+    text-align: center;
+    background: url("ressources/background-black.png");
+    animation: background-defile 10s linear infinite;
+    justify-content: center;
+    color: #ffffff;
+    
+  }
+
+  
+  .text-container img{
+    height: 30px;
+    width: 30px;
+    rotate: 90deg;
+  }
+
+
+  .image-container{
+    
+    background: url("ressources/omg-wow.gif");
+    background-size: contain;
+    height: 90%;
+    margin: 0;
+    
+  }
+
+  
+
+  .image-containerLoose{
+    
+    background: url("ressources/background-black.png");
+    background-size: cover;
+    height: 100%;
+    margin: 0;
+    text-align: center;
+  }
+
+  .image-containerLoose svg{
+    
+    width: 80%;
+    height: 100%;
+    
+  }
+  
+
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .button-contianer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: url("ressources/background-black.png");
+    animation: background-defile 10s linear infinite;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+  }
+  
+  button {
+    padding: 10px 20px;
+    width: 100%;
+    margin: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 32%;
+    padding-top: 5%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0.5);
+    color: black;
+  }  
+.lifeBar{
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    margin: 0 auto;
+}
+
+svg{
+    height: 30px;
+    width: 30px;
+    fill: #333;
+}
+
+#first_heart, 
+#second_heart,
+#third_heart{
+    fill: red;
+}
+
+  .modalLoose {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 25%;
+    padding-top: 4%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgb(0, 0, 0, 0.5);
+    color: black;
+  }  
+
+.tuto{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: gray;
+  font-style: italic;
+  width: 425px;
+  height: 500px;
+  position: absolute;
+  top: 30%;
+  right: 0;
+
+}
+
+.deplacement-control svg{
+  width: 150px;
+  height: 150px;
+  fill: grey;
+}
+
+.deplacement-control{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+
+}
+
+.deplacement-control p{
+  font-size: 50px;
+}
+
+
+.shoot-ult-control{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.powers-left{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  color: #ffff00;
+  margin-top: 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.powers-left div{
+  border: #ffff00 solid;
+  border-radius: 10px;
+  width: 240px;
+  text-align: center;
+  align-items: center;
+}
+
+

@@ -1,0 +1,125 @@
+
+body {
+  color: #fff;
+  background: url(ressources/wp3493594.webp);
+  background-size: cover;
+  background-color: black;
+  animation: background-defile 5s linear infinite;
+}
+
+
+  
+
+  @keyframes background-defile {
+      from {
+          background-position-y: 0px;
+      }
+      to {
+          background-position-y: 3000px;
+      }
+  }
+  
+
+.retour-container #retour{
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  color: #ffff00;
+  text-decoration: none;
+}
+
+.retour-container a svg{
+  height: 30px;
+  width: 30px;
+}
+
+
+
+.retour-container #retour:hover{
+  text-decoration: underline #ffff00;
+}
+
+.marketplace-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+.power-item {
+  height: 344px;
+  margin: 20px;
+  border: solid #ffff00;
+  border-radius: 10px;
+  padding: 20px 30px;
+  box-shadow: 2px 2px 2px gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.power-item h2{
+  color: #ffff00;
+  margin: 0;
+}
+
+.power-icon {
+  width: 100px;
+  height: 100px;
+  border: #ffff00 solid;
+  border-radius: 10px;
+}
+.power-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+.power-description {
+  font-size: 14px;
+  text-align: center;
+}
+.power-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffff00;
+}
+.buy-button {
+  background-color: #ffff00;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+    
+.scoreMarket{
+  display: flex;
+  flex-direction: row;
+  color: #ffff00;
+  border: #ffff00 solid;
+  border-radius: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.incommingPowers{
+  width: 250px;
+}
+
+.acheter{
+  display: none;
+  color: #ffff00;
+  font-size: small;
+  margin: 0;
+
+}
