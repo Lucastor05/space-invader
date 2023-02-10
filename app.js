@@ -1,3 +1,4 @@
+//varibles
 const grille = document.querySelector(".grille");
 const cursorEffetsSonores = document.getElementById("volumeEffets");
 const difficulty = parseInt(sessionStorage.getItem("difficulty"));
@@ -196,6 +197,7 @@ function whereTireur() {
     }
 }
 
+//affiche l'explosion
 function boom(positionTireurShoot) {
     var i=0;
     var bimbamboom =setInterval(function () {
@@ -210,12 +212,15 @@ function boom(positionTireurShoot) {
     }, 100);
 
 }
+
+//verifie si le tireur est sur un alien ou une bombe
 function checkbombeandalien() {
     if(tableauGrille[whereTireur()].classList.contains("alien") || tableauGrille[whereTireur()].classList.contains("boom")){
         loose();
     }
     
 }
+//verifie si il a perdu
 function loose() {
     if(!finito){
         if (tableauGrille[whereTireur()].classList.contains("alien")||tableauGrille[whereTireur()].classList.contains("alienReinforced")||tableauGrille[whereTireur()].classList.contains("wtfIsThat")) {
@@ -235,6 +240,7 @@ function loose() {
     }
 }
 
+//verifie si il a gagné
 function winMaybe() {
     var win = 0;
     for (let i = 0; i < 240; i++) {
@@ -252,28 +258,32 @@ function winMaybe() {
         showModal(score);
     }
 }
-
+//va a gauche
 function moovLeft() {
     tableauGrille[positionTireur].classList.remove("tireur");
     positionTireur--;
     tableauGrille[positionTireur].classList.add("tireur");
 }
+//va a droite
 function moovRight() {
     tableauGrille[positionTireur].classList.remove("tireur");
     positionTireur++;
     tableauGrille[positionTireur].classList.add("tireur");
 }
+//va en haut
 function moovUp() {
     tableauGrille[positionTireur].classList.remove("tireur");
     positionTireur-=20;
     tableauGrille[positionTireur].classList.add("tireur");
 }
+//va en bas
 function moovDown() {
     tableauGrille[positionTireur].classList.remove("tireur");
     positionTireur+=20;
     tableauGrille[positionTireur].classList.add("tireur");
     
 }
+//tire
 function shoot() {
     var positionTireurShoot = positionTireur;
     console.log(positionTireurShoot);
@@ -331,6 +341,9 @@ function shoot() {
 
     }, 40);
 }
+
+
+//tire mais avec la capacité 3bomba
 function setCapacite(){
     var bombabomm = sessionStorage.getItem("3bomba");
     if(bombabomm == sessionStorage.getItem("user") && use3bomba>0){
@@ -544,6 +557,7 @@ function ShipnHit(positionTireurShoot) {
     }
 }
 
+//verifie si le laser touche un alien
 function alienHit3Bomba(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
         if (tableauGrille[positionTireurShoot].classList.contains("alien") && tableauGrille[positionTireurShoot+1].classList.contains("alien") && tableauGrille[positionTireurShoot-1].classList.contains("alien")){
@@ -571,6 +585,7 @@ function alienHit3Bomba(positionTireurShoot) {
         
     }
 }
+
 
 function alienRenforceHit3Bomba(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alienReinforced")) {
@@ -628,6 +643,7 @@ function alienTankHit3Bomba(positionTireurShoot) {
     }
 }
     
+//affichage de l'explosion pour 3bomba
 function boom3boomba(positionTireurShoot) {
     var i=0;
     var bimbamboom =setInterval(function () {
@@ -643,6 +659,7 @@ function boom3boomba(positionTireurShoot) {
 
 }
 
+//tire mais avec raze
 function raze(){
     var ultraze = sessionStorage.getItem("ultraze");
     if(ultraze == sessionStorage.getItem("user") && useUltraze>0){
@@ -827,6 +844,7 @@ useUltraze--;
     
 }
 
+//Fonction qui permet de faire disparaitre les aliens touchés par le laser
 function alienHitRaze(positionTireurShoot) {
     if (tableauGrille[positionTireurShoot].classList.contains("alien")) {
         boomraze(positionTireurShoot);
@@ -871,7 +889,7 @@ function alienTankHitRaze(positionTireurShoot) {
         
     }
 }
-    
+//affiche l'explotion mais avec raze
 function boomraze(positionTireurShoot) {
     var i=0;
     var bimbamboom =setInterval(function () {
@@ -887,6 +905,7 @@ function boomraze(positionTireurShoot) {
 
 }
 
+//enregistre le score dans le local storage
 function bestScores(){
     var username = sessionStorage.getItem("user");
     var score = parseInt(localStorage.getItem("score"));
@@ -981,6 +1000,8 @@ setAlien(alien, tableauGrille);
 var interval1 = setInterval(moveAlien, vitesseAlien);
 var interval3 = setInterval(checkCollision, 10)
 
+
+//addEventListener pour les touches
 document.addEventListener("keydown",
 function moov(event) {
     if (event.code === "ArrowLeft" || event.code === "KeyA") {
@@ -1071,7 +1092,7 @@ music.addEventListener("click", function() {
 
 
 
-
+//affiche la popup de victoire ou de défaite
 
 var modal = document.getElementById("myModalWin");
 var modalLoose = document.getElementById("myModalLoose");

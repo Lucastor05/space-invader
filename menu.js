@@ -1,5 +1,5 @@
 
-
+//affiche, cache le menu si on clique sur le bouton et que le nom est rentré
 document.getElementById("user").placeholder = sessionStorage.getItem("user") || "Entrez votre pseudonyme";
 document.getElementById("user").value = sessionStorage.getItem("user") ;
 const submitBtn = document.querySelector("#jouer");
@@ -22,8 +22,7 @@ submitBtn.addEventListener("click", function(event) {
 });
 
 
-      
-
+    
 
 const buttonEasy = document.getElementById("easy-mode");
 const buttonMedium = document.getElementById("medium-mode");
