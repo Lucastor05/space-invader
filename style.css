@@ -8,8 +8,9 @@
     height: 500px;
     margin: 0 auto;
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    background: url(https://usagif.com/wp-content/uploads/gifs/starfall-gif-20.gif.webp);
-    /*animation: background-defile 5s linear infinite;*/
+    /*background: url(ressources/wp3493594.webp);
+    background: url(https://data.whicdn.com/images/332072434/original.gif);*/
+    animation: background-defile 5s linear infinite;
 
 }
 
@@ -32,7 +33,7 @@ h1 img{
         background-position-y: 0px;
     }
     to {
-        background-position-y: 10000px;
+        background-position-y: 3000px;
     }
 }
 .container-h3{
