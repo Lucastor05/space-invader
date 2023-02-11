@@ -27,7 +27,7 @@ var use3bomba = 3;
 var useUltraze = 1;
 for (let i = 0; i < 10; i++) {
     blaster[i] = new Audio("ressources/blaster.mp3");
-    blaster[i].volume = 0.01;
+    blaster[i].volume = 0.1;
 }
 for (let i = 0; i < 3; i++) {
     hadouken[i] = new Audio("ressources/hadouken.mp3");
@@ -37,10 +37,10 @@ for (let i = 0; i < 3; i++) {
 const play = document.getElementById("playPNG");
 const pause = document.getElementById("pausePNG");
 
-if(audio.pause){
+if(audio.pause()){
     pause.style.display = "none";
     play.style.display = "block";
-}else{
+}else if(audio.play()){
     play.style.display = "none";
     pause.style.display = "block";
 }
@@ -1122,10 +1122,10 @@ cursorEffetsSonores.addEventListener("click", function() {
 });
 
 
-audio.volume = 0.25;
+audio.volume = 0.5;
 
 music.addEventListener("click", function() {
-    audio.volume = music.value/1.2; 
+    audio.volume = music.value; 
 });
 
 
