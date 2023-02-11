@@ -2,6 +2,8 @@
 const grille = document.querySelector(".grille");
 const cursorEffetsSonores = document.getElementById("volumeEffets");
 const difficulty = parseInt(sessionStorage.getItem("difficulty"));
+const music = document.getElementById("musicVolum");
+const audio = document.getElementById("myAudio");
 const tableauGrille = grille.children;
 var proba = 0.01;
 var vitessShootAlien = 700;
@@ -31,6 +33,22 @@ for (let i = 0; i < 3; i++) {
     hadouken[i] = new Audio("ressources/hadouken.mp3");
     hadouken[i].volume = 0.1;
 }
+
+const play = document.getElementById("playPNG");
+const pause = document.getElementById("pausePNG");
+
+
+play.addEventListener("click", function(){
+    play.style.display = "none";
+    pause.style.display = "block";
+    audio.play();
+});
+
+pause.addEventListener("click", function(){
+    pause.style.display = "none";
+    play.style.display = "block";
+    audio.pause();
+});
 
 /*FONCTIONS*/
 
@@ -1096,12 +1114,11 @@ cursorEffetsSonores.addEventListener("click", function() {
     } 
 });
 
-const music = document.getElementById("musicVolum");
-const audio = document.getElementById("myAudio");
+
 audio.volume = 0.25;
 
 music.addEventListener("click", function() {
-    audio.volume = music.value/1.5; 
+    audio.volume = music.value/1.2; 
 });
 
 

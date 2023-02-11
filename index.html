@@ -8,13 +8,17 @@
 </head>
 <body>
     <div class="background-music">
-        <div>
+        <div class="container-music">
             <p id="text">Modifier le volume de la musique: </p>
-            <audio autoplay id="myAudio" loop controls>
+            <audio autoplay id="myAudio" loop>
                 <source src="ressources/Interstellar_Main_Theme.mp3" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
-            <input id="musicVolum" type="range" value="0.01" min="0" max="1" step="0.01">
+            <div class="controls-background-audio">
+                <img src="ressources/play.png" id="playPNG" class="pause-play">
+                <img src="ressources/pause.png" id="pausePNG" class="pause-play">
+                <input id="musicVolum" type="range" value="0.01" min="0" max="1" step="0.01">
+            </div>
             <p id="text">Modifier le volume des effets sonores: </p>
             <input id="volumeEffets" type="range" value="0.01" min="0" max="1" step="0.01">
         </div>

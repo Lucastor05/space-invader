@@ -141,11 +141,31 @@ body {
   flex-direction: column;
   justify-content: center;
 }
+
+.controls-background-audio{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+  border: red;
+}
+
+#pausePNG{
+  display: none;
+}
+
+.pause-play{
+  width: 25px;
+  height: 25px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
 #myAudio {
     width: 10%;
     
 }
-.background-music div{
+.background-music .container-music{
   color: #ffff00;
   padding: 20px;
   border: #ffff00 solid;
@@ -206,12 +226,6 @@ svg{
     height: 30px;
     width: 30px;
     fill: #333;
-}
-
-#first_heart, 
-#second_heart,
-#third_heart{
-    fill: red;
 }
 
 
