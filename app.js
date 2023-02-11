@@ -37,6 +37,13 @@ for (let i = 0; i < 3; i++) {
 const play = document.getElementById("playPNG");
 const pause = document.getElementById("pausePNG");
 
+if(audio.pause){
+    pause.style.display = "none";
+    play.style.display = "block";
+}else{
+    play.style.display = "none";
+    pause.style.display = "block";
+}
 
 play.addEventListener("click", function(){
     play.style.display = "none";
