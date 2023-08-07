@@ -1,7 +1,9 @@
 //vatiables
 const submitBtn = document.querySelector("#bouton3bomba");
 const btn1 = document.getElementById("acheterTripleTir");
+const noPoints1 = document.getElementById("noPointsTripleTir");
 const btn2 = document.getElementById("acheterLigneUlt");
+const noPoints2 = document.getElementById("noPointsLigneUlt");
 const userName = sessionStorage.getItem("user");
 const bombaStorage = sessionStorage.getItem("3bomba");
 const razeStorage = sessionStorage.getItem("ultraze");
@@ -22,7 +24,7 @@ submitBtn.addEventListener("click", function(event) {
         sessionStorage.setItem("3bomba", user);
         btn1.style.display = "block";
     }else{
-        alert("Vous n'avez pas assez de points pour acheter cette bombe");
+        noPoints1.style.display = "block";
     }
   });
 
@@ -46,8 +48,7 @@ if (parseInt(score) > 3000) {
     btn2.style.display = "block";
     
 }else{
-    alert("Vous n'avez pas assez de points pour acheter cette bombe");
-}
+    noPoints2.style.display = "block";}
 });
     
 //fonction pour afficher les points de l'utilisateur
